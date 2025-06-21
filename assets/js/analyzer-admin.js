@@ -317,14 +317,23 @@ if (diff < sevenDays) {
   }
 
   function drawChart(id, list, key){
-    if(!window.Chart||!list) return;
+    if(!list) return;
     var ctx = document.getElementById(id);
     if(!ctx) return;
     var labels=list.map(i=>i.name),
         vals  =list.map(i=>i[key]);
+
+    var palette=[
+      '#3366CC','#DC3912','#FF9900','#109618','#990099',
+      '#3B3EAC','#0099C6','#DD4477','#66AA00','#B82E2E',
+      '#316395','#994499','#22AA99','#AAAA11','#6633CC',
+      '#E67300','#8B0707','#651067','#329262','#5574A6'
+    ];
+    var bg=vals.map(function(_,i){ return palette[i % palette.length]; });
+
     new Chart(ctx.getContext('2d'), {
       type:'pie',
-      data:{ labels, datasets:[{data:vals}] },
+      data:{ labels, datasets:[{data:vals, backgroundColor:bg, borderColor:'#fff', borderWidth:1}] },
       options:{ responsive:true }
     });
   }
