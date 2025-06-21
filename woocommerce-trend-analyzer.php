@@ -66,6 +66,20 @@ function wta_load_selected_language() {
     $po       = $lang_dir . "woocommerce-trend-analyzer-{$lang}.po";
     $mo       = $lang_dir . "woocommerce-trend-analyzer-{$lang}.mo";
 
+    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        error_log(
+            sprintf(
+                'WTA lang switch request: %s | PO: %s (%s) | MO: %s (%s)',
+                $lang,
+                $po,
+                file_exists( $po ) ? 'exists' : 'missing',
+                $mo,
+                file_exists( $mo ) ? 'exists' : 'missing'
+            )
+        );
+    }
+
+
     if ( ! file_exists( $mo ) && file_exists( $po ) ) {
         wta_compile_po_to_mo( $po, $mo );
     }
