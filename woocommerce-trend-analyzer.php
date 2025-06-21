@@ -28,29 +28,8 @@ if ( ! defined( 'WTA_PLUGIN_URL' ) ) {
 
 require_once WTA_PLUGIN_DIR . 'includes/class-woocommerce-trend-analyzer.php';
 
-require_once WTA_PLUGIN_DIR . 'includes/php-mo.php';
-
-register_activation_hook( __FILE__, 'wta_generate_mo_files' );
-
-/**
- * Compile translation files on plugin activation.
- */
-function wta_generate_mo_files() {
-    $languages = [ 'es_ES', 'en_US' ];
-    $lang_dir  = plugin_dir_path( __FILE__ ) . 'languages/';
-
-    foreach ( $languages as $lang ) {
-        $po = $lang_dir . "woocommerce-trend-analyzer-{$lang}.po";
-        $mo = $lang_dir . "woocommerce-trend-analyzer-{$lang}.mo";
-
-        if ( file_exists( $po ) ) {
-            wta_compile_po_to_mo( $po, $mo );
-        }
-    }
-    if ( ! get_option( 'wta_language' ) ) {
-        update_option( 'wta_language', 'es_ES' );
-    }
-}
+// Translation files (.mo) are expected to be present in the languages folder.
+// They are not generated automatically by the plugin.
 
 /**
  * Load selected language for plugin translations.
@@ -63,30 +42,17 @@ function wta_load_selected_language() {
     }
 
     $lang_dir = WTA_PLUGIN_DIR . 'languages/';
-    $po       = $lang_dir . "woocommerce-trend-analyzer-{$lang}.po";
     $mo       = $lang_dir . "woocommerce-trend-analyzer-{$lang}.mo";
 
     if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
         error_log(
             sprintf(
-                'WTA lang switch request: %s | PO: %s (%s) | MO: %s (%s)',
+                'WTA lang switch request: %s | MO: %s (%s)',
                 $lang,
-                $po,
-                file_exists( $po ) ? 'exists' : 'missing',
                 $mo,
                 file_exists( $mo ) ? 'exists' : 'missing'
             )
         );
-    }
-
-    if ( ! file_exists( $mo ) && file_exists( $po ) ) {
-        wta_compile_po_to_mo( $po, $mo );
-        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-            error_log( sprintf( 'WTA post-compile MO exists: %s', file_exists( $mo ) ? 'yes' : 'no' ) );
-        }
-
-    if ( ! file_exists( $mo ) && file_exists( $po ) ) {
-        wta_compile_po_to_mo( $po, $mo );
     }
 
     $mofile = $mo;
