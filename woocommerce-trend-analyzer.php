@@ -5,6 +5,7 @@
  * Version: 1.1
  * Author: Manuel Peña Ramos
  * Text Domain: woocommerce-trend-analyzer
+ * Domain Path: /languages
  * License: GPLv2 or later
  */
 
