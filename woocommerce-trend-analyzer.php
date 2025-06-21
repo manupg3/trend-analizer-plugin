@@ -61,9 +61,19 @@ function wta_load_selected_language() {
         $lang = sanitize_text_field( $_GET['wta_lang'] );
         update_option( 'wta_language', $lang );
     }
-    $mofile = WTA_PLUGIN_DIR . "languages/woocommerce-trend-analyzer-{$lang}.mo";
+
+    $lang_dir = WTA_PLUGIN_DIR . 'languages/';
+    $po       = $lang_dir . "woocommerce-trend-analyzer-{$lang}.po";
+    $mo       = $lang_dir . "woocommerce-trend-analyzer-{$lang}.mo";
+
+    if ( ! file_exists( $mo ) && file_exists( $po ) ) {
+        wta_compile_po_to_mo( $po, $mo );
+    }
+
+    $mofile = $mo;
     unload_textdomain( 'woocommerce-trend-analyzer' );
     load_textdomain( 'woocommerce-trend-analyzer', $mofile );
+
     return $lang;
 }
 
