@@ -1,4 +1,5 @@
 jQuery(document).ready(function($) {
+  function t(k){ return (wta_i18n.strings && wta_i18n.strings[k]) || k; }
   var resultDiv = $('#wta-analysis-result');
 
   function showLoader(t){ t.html('<div class="loader"></div>'); }
@@ -14,12 +15,12 @@ jQuery(document).ready(function($) {
       if(resp.success){
         generateAnalysisContent(resp.data, resultDiv);
       } else {
-        resultDiv.html('<p>'+ (resp.data||'Haz clic en "Analizar Tendencias"') +'</p>');
+        resultDiv.html('<p>'+ (resp.data||t('click_analyze')) +'</p>');
       }
     },
     error(){
       hideLoader(resultDiv);
-      resultDiv.html('<p class="error">Error al obtener datos.</p>');
+      resultDiv.html('<p class="error">'+t('error_fetch')+'</p>');
     }
   });
 
@@ -41,7 +42,7 @@ jQuery(document).ready(function($) {
       },
       error(){
         hideLoader(resultDiv);
-        resultDiv.html('<p class="error">Error al analizar tendencias.</p>');
+        resultDiv.html('<p class="error">'+t('error_analysis')+'</p>');
       }
     });
   });
@@ -70,21 +71,21 @@ function formatInt(n){ return n.toLocaleString(); }
 var cardsHtml = `
   <div class="wta-cards" style="display:flex; gap:16px; margin-bottom:24px;">
     <div class="wta-card" style="flex:1; padding:16px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-      <h4 style="font-size:14px;color:#71717A;margin:0 0 8px;">Ventas Totales</h4>
+      <h4 style="font-size:14px;color:#71717A;margin:0 0 8px;">${t('total_sales')}</h4>
       <p style="font-size:24px; font-weight:bold; margin:0;color:#000;">${ formatMoney(totals.revenue) }</p>
        <div class="div-icono-card-dashboard card-ventas-totales">  
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag h-6 w-6 text-emerald-600"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
       </div>
     </div>
     <div class="wta-card" style="flex:1; padding:16px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-      <h4 style="font-size:14px;color:#71717A;margin:0 0 8px;">Productos Vendidos</h4>
+      <h4 style="font-size:14px;color:#71717A;margin:0 0 8px;">${t('products_sold')}</h4>
       <p style="font-size:24px; font-weight:bold; margin:0;color:#000;">${ formatInt(totals.quantity_sold) }</p>
       <div class="div-icono-card-dashboard card-productos-vendidos">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart3 h-6 w-6 text-sky-600"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
       </div>
     </div>
     <div class="wta-card" style="flex:1; padding:16px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-      <h4 style="font-size:14px;color:#71717A;margin:0 0 8px;">Clientes</h4>
+      <h4 style="font-size:14px;color:#71717A;margin:0 0 8px;">${t('customers')}</h4>
       <p style="font-size:24px; font-weight:bold; margin:0;color:#000;">${ formatInt(totals.customers) }</p>
     <div class="div-icono-card-dashboard card-clientes">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users h-6 w-6 text-violet-600"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -122,7 +123,7 @@ if (diff < sevenDays) {
         white-space: nowrap;
         z-index: 1000;
       ">
-        Se necesitan 7 días de datos nuevos para analizar tendencias…
+        ${t('need_7_days')}
       </span>
     `);
     tooltip = wrapper.find('.wta-tooltip');
@@ -149,7 +150,7 @@ if (diff < sevenDays) {
       padding: 5px 13px;
       border-radius: 3px;
     ">
-      <em>Último Análisis: hace ${ago}</em>
+      <em>${t('last_analysis').replace('%s', ago)}</em>
     </p>
   `);
 
@@ -172,33 +173,33 @@ if (diff < sevenDays) {
     var html = '';
     html += '<div class="wta-tabs">';
     html += '<ul class="wta-tab-links">';
-      html += '<li class="active"><a href="#tab1">Más Vendidos</a></li>';
-      html += '<li><a href="#tab2">Menos Vendidos</a></li>';
-      html += '<li><a href="#tab3">Tendencia Actual</a></li>';
-      html += '<li><a href="#tab4">Sugerencias</a></li>';
-      html += '<li><a href="#tab5">Distribución Geográfica</a></li>';
-      html += '<li><a class="disabled-button" style="padding-top:7px;" href="#">Analisis de Competidores <span class="badge--soon">Pro</span></a></li>';
-      html += '<li><a class="disabled-button" style="padding-top:7px;" href="#">Pronóstico de Ventas<span class="badge--soon">Pro</span></a></li>';
+      html += '<li class="active"><a href="#tab1">'+t('tab_top')+'</a></li>';
+      html += '<li><a href="#tab2">'+t('tab_least')+'</a></li>';
+      html += '<li><a href="#tab3">'+t('tab_trend')+'</a></li>';
+      html += '<li><a href="#tab4">'+t('tab_suggestions')+'</a></li>';
+      html += '<li><a href="#tab5">'+t('tab_geo')+'</a></li>';
+      html += '<li><a class="disabled-button" style="padding-top:7px;" href="#">'+t('tab_comp')+'</a></li>';
+      html += '<li><a class="disabled-button" style="padding-top:7px;" href="#">'+t('tab_forecast')+'</a></li>';
     html += '</ul>';
     html += '<div class="wta-tab-content">';
       // TAB 1
       html += '<div id="tab1" class="wta-tab active">';
       if(data.top_selling_products?.length){
-        html += '<h3>Productos Más Vendidos</h3>';
-        html += '<table class="wta-table"><thead><tr><th>Nombre</th><th>Cantidad</th><th>Ingresos</th><th>Precio Prom.</th></tr></thead><tbody>';
+        html += '<h3>'+t('top_products')+'</h3>';
+        html += '<table class="wta-table"><thead><tr><th>'+t('table_name')+'</th><th>'+t('table_qty')+'</th><th>'+t('table_rev')+'</th><th>'+t('table_avg')+'</th></tr></thead><tbody>';
         data.top_selling_products.forEach(function(p){
           html += '<tr><td>'+p.name+'</td><td>'+p.quantity_sold+'</td><td>$'+p.total_revenue.toFixed(2)+'</td><td>$'+p.average_price.toFixed(2)+'</td></tr>';
         });
         html += '</tbody></table>';
         html += '<div class="wta-chart-resume"><div><canvas id="top-selling-chart"></canvas></div>' +
-                '<div class="container-customer-analysis"><h2>Análisis De Clientes Por Producto</h2>' +
+                '<div class="container-customer-analysis"><h2>'+t('customer_analysis')+'</h2>' +
                 '<div class="container-customer-analysis-lis">';
         data.top_selling_products.forEach(function(prod){
           if(prod.customer_analysis){
             html += '<div class="product-customer-analysis"><details>' +
-                '<summary>Análisis de '+prod.name+'</summary>';
+                '<summary>'+t('product_analysis').replace('%s', prod.name)+'</summary>';
          if (prod.customer_analysis.location_distribution) {
-                  html += '<h5>Análisis por Ubicación</h5>';
+                  html += '<h5>'+t('location_analysis')+'</h5>';
                   const locs = prod.customer_analysis.location_distribution;
                 
                   // Si viene un array de objetos, montamos una lista
@@ -216,75 +217,75 @@ if (diff < sevenDays) {
                 }
 
             if(prod.customer_analysis.other_trends){
-              html += '<h5>Otras Tendencias</h5><p>'+prod.customer_analysis.other_trends+'</p>';
+              html += '<h5>'+t('other_trends')+'</h5><p>'+prod.customer_analysis.other_trends+'</p>';
             }
             html += '</details></div>';
           }
         });
         html += '</div></div></div>';
       } else {
-        html += '<p>No hay datos de productos más vendidos.</p>';
+        html += '<p>'+t('no_top_data')+'</p>';
       }
       html += '</div>';
 
       // TAB 2
       html += '<div id="tab2" class="wta-tab">';
       if(data.least_selling_products?.length){
-        html += '<h3>Productos Menos Vendidos</h3>';
-        html += '<table class="wta-table"><thead><tr><th>Nombre</th><th>Cantidad</th><th>Ingresos</th><th>Precio Prom.</th></tr></thead><tbody>';
+        html += '<h3>'+t('least_products')+'</h3>';
+        html += '<table class="wta-table"><thead><tr><th>'+t('table_name')+'</th><th>'+t('table_qty')+'</th><th>'+t('table_rev')+'</th><th>'+t('table_avg')+'</th></tr></thead><tbody>';
         data.least_selling_products.forEach(function(p){
           html += '<tr><td>'+p.name+'</td><td>'+p.quantity_sold+'</td><td>$'+p.total_revenue.toFixed(2)+'</td><td>$'+p.average_price.toFixed(2)+'</td></tr>';
         });
         html += '</tbody></table>';
         html += '<div class="wta-chart-resume"><div><canvas id="least-selling-chart"></canvas></div>' +
-                '<div class="container-customer-analysis"><h2>Análisis De Clientes Por Producto</h2>' +
+                '<div class="container-customer-analysis"><h2>'+t('customer_analysis')+'</h2>' +
                 '<div class="container-customer-analysis-lis">';
         data.least_selling_products.forEach(function(prod){
           if(prod.customer_analysis){
             html += '<div class="product-customer-analysis"><details>' +
-                '<summary>Análisis de '+prod.name+'</summary>';
+                '<summary>'+t('product_analysis').replace('%s', prod.name)+'</summary>';
             if(prod.customer_analysis.location_distribution){
-              html += '<h5>Análisis por Ubicación</h5><p>'+prod.customer_analysis.location_distribution+'</p>';
+              html += '<h5>'+t('location_analysis')+'</h5><p>'+prod.customer_analysis.location_distribution+'</p>';
             }
             if(prod.customer_analysis.other_trends){
-              html += '<h5>Otras Tendencias</h5><p>'+prod.customer_analysis.other_trends+'</p>';
+              html += '<h5>'+t('other_trends')+'</h5><p>'+prod.customer_analysis.other_trends+'</p>';
             }
             html += '</details></div>';
           }
         });
         html += '</div></div></div>';
       } else {
-        html += '<p>No hay datos de productos menos vendidos.</p>';
+        html += '<p>'+t('no_least_data')+'</p>';
       }
       html += '</div>';
 
       // TAB 3
       html += '<div id="tab3" class="wta-tab">';
-      html += data.trends ? '<h3>Tendencias</h3><p>'+data.trends+'</p>' : '<p>No se identificaron tendencias.</p>';
+      html += data.trends ? '<h3>'+t('trends_title')+'</h3><p>'+data.trends+'</p>' : '<p>'+t('no_trends')+'</p>';
       html += '</div>';
 
       // TAB 4
       html += '<div id="tab4" class="wta-tab">';
       if(data.sugerencias?.length){
-        html += '<p class="wta-soon-text"><svg width="64" height="64" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#004085" stroke-width="1.5"/><path d="M12 17V11" stroke="#004085" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="9" r="1" fill="#004085"/></svg>A continuación, encontrarás recomendaciones:</p>';
+        html += '<p class="wta-soon-text"><svg width="64" height="64" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#004085" stroke-width="1.5"/><path d="M12 17V11" stroke="#004085" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="9" r="1" fill="#004085"/></svg>'+t('suggestions_intro')+'</p>';
         html += '<ul>';
         data.sugerencias.forEach(s=> html+='<li>'+s+'</li>');
         html += '</ul>';
       } else {
-        html += '<p>No hay sugerencias disponibles.</p>';
+        html += '<p>'+t('no_suggestions')+'</p>';
       }
       html += '</div>';
 
       // TAB 5
       html += '<div id="tab5" class="wta-tab">';
       if(data.location_distribution?.length){
-        html += '<h3>Distribución Geográfica de Ventas</h3><div class="location-cards-container">';
+        html += '<h3>'+t('geo_sales_title')+'</h3><div class="location-cards-container">';
         data.location_distribution.forEach(loc=>{
-          html += '<div class="location-card"><div class="location-icon">📍</div><div class="location-info"><h4>'+loc.city+'</h4><p>Ventas: '+loc.sales+'</p></div></div>';
+          html += '<div class="location-card"><div class="location-icon">📍</div><div class="location-info"><h4>'+loc.city+'</h4><p>'+t('sales_label')+': '+loc.sales+'</p></div></div>';
         });
         html += '</div>';
       } else {
-        html += '<p>No hay datos geográficos disponibles.</p>';
+        html += '<p>'+t('no_geo_data')+'</p>';
       }
       html += '</div>';
 
@@ -310,10 +311,10 @@ if (diff < sevenDays) {
   function timeAgo(ms){
     var sec=Math.floor(ms/1000), min=Math.floor(sec/60),
         hr=Math.floor(min/60), day=Math.floor(hr/24);
-    if(day>0) return day+' día'+(day>1?'s':'');
-    if(hr>0)   return hr+' hora'+(hr>1?'s':'');
-    if(min>0)  return min+' minuto'+(min>1?'s':'');
-    return 'unos segundos';
+    if(day>0) return day+' '+t('day')+(day>1?'s':'');
+    if(hr>0)   return hr+' '+t('hour')+(hr>1?'s':'');
+    if(min>0)  return min+' '+t('minute')+(min>1?'s':'');
+    return t('few_seconds');
   }
 
   function drawChart(id, list, key){
@@ -339,4 +340,8 @@ if (diff < sevenDays) {
       options:{ responsive:true }
     });
   }
+
+  $('#wta-lang-select').on('change', function(){
+    $('#wta-lang-form').submit();
+  });
 });
