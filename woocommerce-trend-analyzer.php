@@ -28,8 +28,7 @@ if ( ! defined( 'WTA_PLUGIN_URL' ) ) {
 
 require_once WTA_PLUGIN_DIR . 'includes/class-woocommerce-trend-analyzer.php';
 
-use Gettext\Translations;
-use Gettext\Generators\Mo;
+require_once WTA_PLUGIN_DIR . 'includes/php-mo.php';
 
 register_activation_hook( __FILE__, 'wta_generate_mo_files' );
 
@@ -37,10 +36,6 @@ register_activation_hook( __FILE__, 'wta_generate_mo_files' );
  * Compile translation files on plugin activation.
  */
 function wta_generate_mo_files() {
-    if ( ! class_exists( '\\Gettext\\Translations' ) ) {
-        return;
-    }
-
     $languages = [ 'es_ES', 'en_US' ];
     $lang_dir  = plugin_dir_path( __FILE__ ) . 'languages/';
 
@@ -49,8 +44,7 @@ function wta_generate_mo_files() {
         $mo = $lang_dir . "woocommerce-trend-analyzer-{$lang}.mo";
 
         if ( file_exists( $po ) ) {
-            $translations = Translations::fromPoFile( $po );
-            Mo::toFile( $translations, $mo );
+            wta_compile_po_to_mo( $po, $mo );
         }
     }
 }
