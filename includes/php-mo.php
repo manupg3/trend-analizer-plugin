@@ -8,6 +8,9 @@
  * @return bool True on success, false on failure.
  */
 function wta_compile_po_to_mo( $in, $out ) {
+    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        error_log( sprintf( 'WTA compiling %s to %s', $in, $out ) );
+    }
     $fh = @fopen( $in, 'r' );
     if ( ! $fh ) {
         return false;
@@ -100,5 +103,9 @@ function wta_compile_po_to_mo( $in, $out ) {
     $mo .= $ids;
     $mo .= $strs;
 
-    return false !== file_put_contents( $out, $mo );
+    $success = false !== file_put_contents( $out, $mo );
+    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        error_log( sprintf( 'WTA compile result for %s: %s', $out, $success ? 'ok' : 'failed' ) );
+    }
+    return $success;
 }
