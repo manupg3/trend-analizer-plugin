@@ -8,24 +8,27 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce Trend Analyzer analiza los datos de tu tienda y utiliza ChatGPT para ofrecer informes sobre las tendencias de ventas.
+WooCommerce Trend Analyzer analyzes your store data and uses ChatGPT to provide sales trend reports.
 
 == Description ==
-WooCommerce Trend Analyzer analiza tus estadísticas de ventas y consulta la API de OpenAI para identificar productos más vendidos, productos con menos ventas y sugerencias de tendencias.
+WooCommerce Trend Analyzer analyzes your sales statistics and queries the OpenAI API to identify best-selling products, low-performing products, and trend suggestions.
 
 == Installation ==
-1. Sube la carpeta del plugin al directorio `/wp-content/plugins/`.
-2. Activa el plugin desde el menú "Plugins" en WordPress.
-3. Abre "Trend Analyzer" en el menú de administración y configura tu clave API de OpenAI.
+1. Upload the plugin folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the "Plugins" menu in WordPress.
+3. Open "Trend Analyzer" in the admin menu and set your OpenAI API key.
 
 == Frequently Asked Questions ==
 
-= ¿Qué modelo de OpenAI utiliza? =
-Actualmente se utiliza GPT-4o para calcular las tendencias.
+= Which OpenAI model does it use? =
+It currently uses GPT-4o to calculate trends.
 
-= ¿Con qué frecuencia puedo ejecutar un análisis? =
-Los análisis pueden ejecutarse una vez cada siete días para asegurar que haya nuevos datos de ventas.
+= How often can I run an analysis? =
+Analyses can be run once every seven days to ensure there is new sales data.
+
+== Privacy ==
+The plugin sends order information (product, quantity, city, etc.) to the OpenAI API to generate the trend report.
 
 == Changelog ==
 = 1.1 =
-* Versión inicial del plugin.
+* Initial plugin release.
