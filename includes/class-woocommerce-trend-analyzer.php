@@ -15,6 +15,13 @@ class WooCommerce_Trend_Analyzer {
     private $api_key_option = 'wta_openai_api_key';
 
     /**
+     * Option name for selected language.
+     *
+     * @var string
+     */
+    private $language_option = 'wta_language';
+
+    /**
      * Returns class instance.
      *
      * @return self
@@ -152,6 +159,14 @@ class WooCommerce_Trend_Analyzer {
             <h2><?php esc_html_e( 'Dashboard', 'woocommerce-trend-analyzer' ); ?></h2>
             <p><?php esc_html_e( 'Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda', 'woocommerce-trend-analyzer' ); ?></p>
             <div class="button-container">
+              <form id="wta-lang-form" class="wta-language-select" method="get">
+                <input type="hidden" name="page" value="trend-analyzer" />
+                <?php $sel = get_option( $this->language_option, 'es_ES' ); ?>
+                <select id="wta-lang-select" name="wta_lang">
+                  <option value="es_ES" <?php selected( $sel, 'es_ES' ); ?>><?php esc_html_e( 'Español', 'woocommerce-trend-analyzer' ); ?></option>
+                  <option value="en_US" <?php selected( $sel, 'en_US' ); ?>><?php esc_html_e( 'English', 'woocommerce-trend-analyzer' ); ?></option>
+                </select>
+              </form>
               <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'woocommerce-trend-analyzer' ); ?></button>
               <a class="obtener-pro-version" href="#"><?php esc_html_e( 'Obtener Pro Version', 'woocommerce-trend-analyzer' ); ?></a>
             </div>
@@ -184,6 +199,53 @@ class WooCommerce_Trend_Analyzer {
             'nonce'     => wp_create_nonce( 'wta_analyze_trends_nonce' ),
             'get_nonce' => wp_create_nonce( 'wta_get_analysis_data_nonce' ),
         ] );
+        wp_localize_script( 'wta-admin-js', 'wta_i18n', [
+            'lang'    => get_option( $this->language_option, 'es_ES' ),
+            'strings' => $this->get_js_strings(),
+        ] );
+    }
+
+    private function get_js_strings() {
+        return [
+            'click_analyze'   => __( 'Haz clic en "Analizar Tendencias"', 'woocommerce-trend-analyzer' ),
+            'error_fetch'     => __( 'Error al obtener datos.', 'woocommerce-trend-analyzer' ),
+            'error_analysis'  => __( 'Error al analizar tendencias.', 'woocommerce-trend-analyzer' ),
+            'total_sales'     => __( 'Ventas Totales', 'woocommerce-trend-analyzer' ),
+            'products_sold'   => __( 'Productos Vendidos', 'woocommerce-trend-analyzer' ),
+            'customers'       => __( 'Clientes', 'woocommerce-trend-analyzer' ),
+            'need_7_days'     => __( 'Se necesitan 7 días de datos nuevos para analizar tendencias…', 'woocommerce-trend-analyzer' ),
+            'last_analysis'   => __( 'Último Análisis: hace %s', 'woocommerce-trend-analyzer' ),
+            'tab_top'         => __( 'Más Vendidos', 'woocommerce-trend-analyzer' ),
+            'tab_least'       => __( 'Menos Vendidos', 'woocommerce-trend-analyzer' ),
+            'tab_trend'       => __( 'Tendencia Actual', 'woocommerce-trend-analyzer' ),
+            'tab_suggestions' => __( 'Sugerencias', 'woocommerce-trend-analyzer' ),
+            'tab_geo'         => __( 'Distribución Geográfica', 'woocommerce-trend-analyzer' ),
+            'tab_comp'        => __( 'Analisis de Competidores <span class="badge--soon">Pro</span>', 'woocommerce-trend-analyzer' ),
+            'tab_forecast'    => __( 'Pronóstico de Ventas<span class="badge--soon">Pro</span>', 'woocommerce-trend-analyzer' ),
+            'top_products'    => __( 'Productos Más Vendidos', 'woocommerce-trend-analyzer' ),
+            'least_products'  => __( 'Productos Menos Vendidos', 'woocommerce-trend-analyzer' ),
+            'table_name'      => __( 'Nombre', 'woocommerce-trend-analyzer' ),
+            'table_qty'       => __( 'Cantidad', 'woocommerce-trend-analyzer' ),
+            'table_rev'       => __( 'Ingresos', 'woocommerce-trend-analyzer' ),
+            'table_avg'       => __( 'Precio Prom.', 'woocommerce-trend-analyzer' ),
+            'customer_analysis'=> __( 'Análisis De Clientes Por Producto', 'woocommerce-trend-analyzer' ),
+            'product_analysis'=> __( 'Análisis de %s', 'woocommerce-trend-analyzer' ),
+            'location_analysis'=> __( 'Análisis por Ubicación', 'woocommerce-trend-analyzer' ),
+            'other_trends'    => __( 'Otras Tendencias', 'woocommerce-trend-analyzer' ),
+            'no_top_data'     => __( 'No hay datos de productos más vendidos.', 'woocommerce-trend-analyzer' ),
+            'no_least_data'   => __( 'No hay datos de productos menos vendidos.', 'woocommerce-trend-analyzer' ),
+            'trends_title'    => __( 'Tendencias', 'woocommerce-trend-analyzer' ),
+            'no_trends'       => __( 'No se identificaron tendencias.', 'woocommerce-trend-analyzer' ),
+            'suggestions_intro'=> __( 'A continuación, encontrarás recomendaciones:', 'woocommerce-trend-analyzer' ),
+            'no_suggestions'  => __( 'No hay sugerencias disponibles.', 'woocommerce-trend-analyzer' ),
+            'geo_sales_title' => __( 'Distribución Geográfica de Ventas', 'woocommerce-trend-analyzer' ),
+            'sales_label'     => __( 'Ventas', 'woocommerce-trend-analyzer' ),
+            'no_geo_data'     => __( 'No hay datos geográficos disponibles.', 'woocommerce-trend-analyzer' ),
+            'day'             => __( 'día', 'woocommerce-trend-analyzer' ),
+            'hour'            => __( 'hora', 'woocommerce-trend-analyzer' ),
+            'minute'          => __( 'minuto', 'woocommerce-trend-analyzer' ),
+            'few_seconds'     => __( 'unos segundos', 'woocommerce-trend-analyzer' ),
+        ];
     }
 
 

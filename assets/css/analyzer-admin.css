@@ -65,6 +65,7 @@
 
 
 .button-container {
+    position: relative;
     display: flex !important;
     align-items: center;
     gap: 10px;
@@ -573,4 +574,10 @@ details[open] summary {
     max-width: 100%;
     height: auto;
     margin-top: 20px;
+}
+
+.wta-language-select {
+    position: absolute;
+    right: 0;
+    top: -40px;
 }
