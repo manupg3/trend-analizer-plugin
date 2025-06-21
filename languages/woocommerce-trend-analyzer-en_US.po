@@ -1,0 +1,86 @@
+msgid ""
+msgstr ""
+"Language: en_US\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Trend Analyzer"
+msgstr "Trend Analyzer"
+
+msgid "Configuración de OpenAI"
+msgstr "OpenAI Settings"
+
+msgid "Clave de API de OpenAI"
+msgstr "OpenAI API Key"
+
+msgid "Clave API configurada"
+msgstr "API Key set"
+
+msgid "Introduce tu clave API de OpenAI"
+msgstr "Enter your OpenAI API key"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "La clave API está configurada. Ingresa una nueva clave para "
+msgstr "The API key is set. Enter a new key to "
+
+msgid "actualizarla"
+msgstr "update it"
+
+msgid "o pulsa \"Clear\" para eliminarla."
+msgstr "or press \"Clear\" to remove it."
+
+msgid "No hay ninguna clave API configurada actualmente. Ingresa tu clave API para configurarla."
+msgstr "No API key is currently set. Enter your API key to configure it."
+
+msgid "¿Estás seguro de que deseas eliminar la clave API?"
+msgstr "Are you sure you want to delete the API key?"
+
+msgid "Sí"
+msgstr "Yes"
+
+msgid "No"
+msgstr "No"
+
+msgid "Conectado"
+msgstr "Connected"
+
+msgid "No conectado"
+msgstr "Not connected"
+
+msgid "Sales Trend Analyzer – IA"
+msgstr "Sales Trend Analyzer – AI"
+
+msgid "Configuración"
+msgstr "Settings"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda"
+msgstr "Get detailed and personalized analysis of current trends in your store"
+
+msgid "Analizar Tendencias"
+msgstr "Analyze Trends"
+
+msgid "Obtener Pro Version"
+msgstr "Get Pro Version"
+
+msgid "No se encontraron pedidos."
+msgstr "No orders found."
+
+msgid "Sin ciudad"
+msgstr "No city"
+
+msgid "Clave API no configurada."
+msgstr "API key not set."
+
+msgid "Error API OpenAI: %s"
+msgstr "OpenAI API Error: %s"
+
+msgid "JSON inválido: %s"
+msgstr "Invalid JSON: %s"
+
+msgid "No hay datos de análisis disponibles."
+msgstr "No analysis data available."

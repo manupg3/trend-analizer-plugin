@@ -30,6 +30,7 @@ require_once WTA_PLUGIN_DIR . 'includes/class-woocommerce-trend-analyzer.php';
  * Initialize plugin.
  */
 function wta_init() {
+    load_plugin_textdomain( 'woocommerce-trend-analyzer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     WooCommerce_Trend_Analyzer::get_instance();
 }
 add_action( 'plugins_loaded', 'wta_init' );

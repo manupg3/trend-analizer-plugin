@@ -42,8 +42,8 @@ class WooCommerce_Trend_Analyzer {
 
     public function add_admin_menu() {
         add_menu_page(
-            'Trend Analyzer',
-            'Trend Analyzer',
+            __( 'Trend Analyzer', 'woocommerce-trend-analyzer' ),
+            __( 'Trend Analyzer', 'woocommerce-trend-analyzer' ),
             'manage_options',
             'trend-analyzer',
             [ $this, 'render_dashboard_page' ],
@@ -60,13 +60,13 @@ class WooCommerce_Trend_Analyzer {
         ] );
         add_settings_section(
             'wta_settings_section',
-            'Configuración de OpenAI',
+            __( 'Configuración de OpenAI', 'woocommerce-trend-analyzer' ),
             null,
             'trend-analyzer'
         );
         add_settings_field(
             'wta_api_key',
-            'Clave de API de OpenAI',
+            __( 'Clave de API de OpenAI', 'woocommerce-trend-analyzer' ),
             [ $this, 'render_api_key_field' ],
             'trend-analyzer',
             'wta_settings_section'
@@ -79,22 +79,24 @@ class WooCommerce_Trend_Analyzer {
 
     public function render_api_key_field() {
         $api_key     = get_option( $this->api_key_option );
-        $placeholder = $api_key ? 'Clave API configurada' : 'Introduce tu clave API de OpenAI';
+        $placeholder = $api_key
+            ? __( 'Clave API configurada', 'woocommerce-trend-analyzer' )
+            : __( 'Introduce tu clave API de OpenAI', 'woocommerce-trend-analyzer' );
 
         echo '<input type="password" name="' . esc_attr( $this->api_key_option ) . '" value="" size="50" placeholder="' . esc_attr( $placeholder ) . '" id="wta-api-key-field" />';
-        echo ' <button type="button" class="button" id="wta-clear-api-key-button">Clear</button>';
+        echo ' <button type="button" class="button" id="wta-clear-api-key-button">' . esc_html__( 'Clear', 'woocommerce-trend-analyzer' ) . '</button>';
         if ( $api_key ) {
-            echo '<p>La clave API está configurada. Ingresa una nueva clave para <strong>actualizarla</strong> o pulsa "Clear" para eliminarla.</p>';
+            echo '<p>' . esc_html__( 'La clave API está configurada. Ingresa una nueva clave para ', 'woocommerce-trend-analyzer' ) . '<strong>' . esc_html__( 'actualizarla', 'woocommerce-trend-analyzer' ) . '</strong> ' . esc_html__( 'o pulsa "Clear" para eliminarla.', 'woocommerce-trend-analyzer' ) . '</p>';
         } else {
-            echo '<p>No hay ninguna clave API configurada actualmente. Ingresa tu clave API para configurarla.</p>';
+            echo '<p>' . esc_html__( 'No hay ninguna clave API configurada actualmente. Ingresa tu clave API para configurarla.', 'woocommerce-trend-analyzer' ) . '</p>';
         }
         // Modal Clear
         echo '
         <div id="wta-clear-api-key-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:9999;">
           <div style="background:#fff;margin:10% auto;padding:20px;border-radius:4px;width:320px;text-align:center;">
-            <p>¿Estás seguro de que deseas eliminar la clave API?</p>
-            <button id="wta-confirm-clear" class="button button-primary">Sí</button>
-            <button id="wta-cancel-clear"  class="button">No</button>
+            <p>' . esc_html__( '¿Estás seguro de que deseas eliminar la clave API?', 'woocommerce-trend-analyzer' ) . '</p>
+            <button id="wta-confirm-clear" class="button button-primary">' . esc_html__( 'Sí', 'woocommerce-trend-analyzer' ) . '</button>
+            <button id="wta-cancel-clear"  class="button">' . esc_html__( 'No', 'woocommerce-trend-analyzer' ) . '</button>
           </div>
         </div>
         <script>
@@ -121,20 +123,20 @@ class WooCommerce_Trend_Analyzer {
 
     public function render_dashboard_page() {
         $api_key           = get_option( $this->api_key_option );
-        $connection_status = $api_key ? 'Conectado' : 'No conectado';
+        $connection_status = $api_key ? __( 'Conectado', 'woocommerce-trend-analyzer' ) : __( 'No conectado', 'woocommerce-trend-analyzer' );
         
         
         
         ?>
         <div class="wrap container-dashboard-analyzer">
-          <h1>Sales Trend Analyzer – IA</h1>
+          <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'woocommerce-trend-analyzer' ); ?></h1>
           <details>
             <summary>
-              Configuración
+              <?php esc_html_e( 'Configuración', 'woocommerce-trend-analyzer' ); ?>
               <?php if ( $connection_status === 'Conectado' ): ?>
-                <span class="conection-ok"><?php echo $connection_status; ?></span>
+                <span class="conection-ok"><?php echo esc_html( $connection_status ); ?></span>
               <?php else: ?>
-                <span class="conection-error"><?php echo $connection_status; ?></span>
+                <span class="conection-error"><?php echo esc_html( $connection_status ); ?></span>
               <?php endif; ?>
             </summary>
             <form method="post" action="options.php">
@@ -147,11 +149,11 @@ class WooCommerce_Trend_Analyzer {
           </details>
           <hr>
           <div style="padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
-            <h2>Dashboard</h2>
-            <p>Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda</p>
+            <h2><?php esc_html_e( 'Dashboard', 'woocommerce-trend-analyzer' ); ?></h2>
+            <p><?php esc_html_e( 'Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda', 'woocommerce-trend-analyzer' ); ?></p>
             <div class="button-container">
-              <button id="wta-analyze-trends-button" class="button button-primary">Analizar Tendencias</button>
-              <a class="obtener-pro-version" href="#">Obtener Pro Version</a>
+              <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'woocommerce-trend-analyzer' ); ?></button>
+              <a class="obtener-pro-version" href="#"><?php esc_html_e( 'Obtener Pro Version', 'woocommerce-trend-analyzer' ); ?></a>
             </div>
             <div id="wta-analysis-result" style="margin-top:20px;"></div>
           </div>
@@ -201,7 +203,7 @@ public function analyze_trends() {
         'type'   => 'shop_order',
     ]);
     if ( empty( $orders ) ) {
-        wp_send_json_error( 'No se encontraron pedidos.' );
+        wp_send_json_error( __( 'No se encontraron pedidos.', 'woocommerce-trend-analyzer' ) );
     }
 
     // 2) Inicializar estructuras
@@ -212,7 +214,7 @@ public function analyze_trends() {
     // 3) Recorrer pedidos e ítems
     foreach ( $orders as $order ) {
         
-        $city = $order->get_billing_city() ?: 'Sin ciudad';
+        $city = $order->get_billing_city() ?: __( 'Sin ciudad', 'woocommerce-trend-analyzer' );
 
         foreach ( $order->get_items() as $item ) {
             if ( 'line_item' !== $item->get_type() ) {
@@ -292,7 +294,7 @@ EOT;
     // 6) Llamada a OpenAI
     $api_key = get_option( $this->api_key_option );
     if ( ! $api_key ) {
-        wp_send_json_error( 'Clave API no configurada.' );
+        wp_send_json_error( __( 'Clave API no configurada.', 'woocommerce-trend-analyzer' ) );
     }
     $resp = wp_remote_post( 'https://api.openai.com/v1/chat/completions', [
         'headers' => [
@@ -315,7 +317,7 @@ EOT;
     $code    = wp_remote_retrieve_response_code( $resp );
     $body    = wp_remote_retrieve_body( $resp );
     if ( 200 !== $code ) {
-        wp_send_json_error( "Error API OpenAI: $body" );
+        wp_send_json_error( sprintf( __( 'Error API OpenAI: %s', 'woocommerce-trend-analyzer' ), $body ) );
     }
 
     // 7) Parsear respuesta
@@ -329,7 +331,7 @@ EOT;
     }
     $result = json_decode( $json, true );
     if ( json_last_error() ) {
-        wp_send_json_error( 'JSON inválido: ' . json_last_error_msg() );
+        wp_send_json_error( sprintf( __( 'JSON inválido: %s', 'woocommerce-trend-analyzer' ), json_last_error_msg() ) );
     }
 
     // 8) Inyectar distribución correcta en PHP
@@ -402,7 +404,7 @@ $result['totals'] = [
         if ( $stored ) {
             wp_send_json_success( $stored );
         } else {
-            wp_send_json_error( 'No hay datos de análisis disponibles.' );
+            wp_send_json_error( __( 'No hay datos de análisis disponibles.', 'woocommerce-trend-analyzer' ) );
         }
     }
 }
