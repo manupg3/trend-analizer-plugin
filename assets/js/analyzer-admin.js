@@ -342,6 +342,7 @@ if (diff < sevenDays) {
   }
 
   $('#wta-lang-select').on('change', function(){
+    console.log('WTA lang select changed to', $(this).val());
     $('#wta-lang-form').submit();
   });
 });
