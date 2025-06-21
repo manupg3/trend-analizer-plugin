@@ -93,12 +93,15 @@ function wta_compile_po_to_mo( $in, $out ) {
     $offset += strlen( $ids );
     $strs_offset = $offset;
 
-    $mo  = pack( 'L4', 0x950412de, 0, $count, $orig_offset, $trans_offset );
+    // Header consists of 7 little-endian 32-bit integers as per GNU MO specification:
+    // magic, revision, count, offset of originals, offset of translations,
+    // size of hash table and offset of hash table (both zero here).
+    $mo  = pack( 'V*', 0x950412de, 0, $count, $orig_offset, $trans_offset, 0, 0 );
     foreach ( $offsets_orig as $o ) {
-        $mo .= pack( 'L2', $o[0], $ids_offset + $o[1] );
+        $mo .= pack( 'V2', $o[0], $ids_offset + $o[1] );
     }
     foreach ( $offsets_tr as $o ) {
-        $mo .= pack( 'L2', $o[0], $strs_offset + $o[1] );
+        $mo .= pack( 'V2', $o[0], $strs_offset + $o[1] );
     }
     $mo .= $ids;
     $mo .= $strs;
