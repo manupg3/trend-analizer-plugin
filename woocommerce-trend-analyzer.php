@@ -5,6 +5,7 @@
  * Version: 1.1
  * Author: Manuel Peña Ramos
  * Text Domain: woocommerce-trend-analyzer
+ * License: GPLv2 or later
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
