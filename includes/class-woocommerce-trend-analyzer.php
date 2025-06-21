@@ -337,8 +337,29 @@ public function analyze_trends() {
     }
     $ai_json = wp_json_encode( $ai_input );
 
-    // 5) Prompt para OpenAI
-    $prompt = <<<EOT
+    // 5) Prompt para OpenAI adaptado al idioma seleccionado
+    $lang       = get_option( $this->language_option, 'es_ES' );
+    $prompt = '';
+    if ( 'en_US' === $lang ) {
+        $prompt = <<<EOT
+You have this list of products with their sales:
+
+$ai_json
+
+Return ONLY a JSON in English with this EXACT structure:
+
+{
+  "top_selling_products": [ /* up to 10 */ ],
+  "least_selling_products": [ /* at least 2 */ ],
+  "trends": "identify at least 2 short trends",
+  "sugerencias": ["…","…","…"],
+  "location_distribution": [ /* ignore this, we will compute in PHP */ ]
+}
+
+For each product in top/least, add a `customer_analysis.other_trends` field with brief text. Nothing more.
+EOT;
+    } else {
+        $prompt = <<<EOT
 Tienes este listado de productos con sus ventas:
 
 $ai_json
@@ -355,6 +376,7 @@ Devuélveme solo un JSON en español con esta estructura EXACTA:
 
 En cada producto de top/least, añade un campo `customer_analysis.other_trends` con texto breve. Nada más.
 EOT;
+    }
 
     // 6) Llamada a OpenAI
     $api_key = get_option( $this->api_key_option );
@@ -369,7 +391,12 @@ EOT;
         'body'    => wp_json_encode([
             'model'    => 'gpt-4o',
             'messages' => [
-                [ 'role'=>'system','content'=>'Eres un asistente que responde SOLO JSON.' ],
+                [
+                    'role'    => 'system',
+                    'content' => ( 'en_US' === $lang )
+                        ? 'You are an assistant that only responds with JSON.'
+                        : 'Eres un asistente que responde SOLO JSON.',
+                ],
                 [ 'role'=>'user',  'content'=>$prompt ],
             ],
             'temperature'=>0.0,
