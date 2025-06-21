@@ -165,7 +165,7 @@ class WooCommerce_Trend_Analyzer {
         if ( $hook !== 'toplevel_page_trend-analyzer' ) {
             return;
         }
-        wp_enqueue_script( 'chart-js', 'https://cdn.jsdelivr.net/npm/chart.js', [], '3.9.1', true );
+        wp_enqueue_script( 'chart-js', WTA_PLUGIN_URL . 'assets/js/chart.js', [], '3.9.1', true );
         wp_enqueue_script(
             'wta-admin-js',
             WTA_PLUGIN_URL . 'assets/js/analyzer-admin.js',
@@ -189,6 +189,9 @@ class WooCommerce_Trend_Analyzer {
 
 public function analyze_trends() {
     check_ajax_referer( 'wta_analyze_trends_nonce', 'nonce' );
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( __( 'Permisos insuficientes.', 'woocommerce-trend-analyzer' ) );
+    }
     
     $totalQuantityAll = 0;
     $totalRevenueAll  = 0;
@@ -400,6 +403,9 @@ $result['totals'] = [
 
     public function get_analysis_data() {
         check_ajax_referer( 'wta_get_analysis_data_nonce', 'nonce' );
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( __( 'Permisos insuficientes.', 'woocommerce-trend-analyzer' ) );
+        }
         $stored = get_option( 'wta_analysis_data' );
         if ( $stored ) {
             wp_send_json_success( $stored );
