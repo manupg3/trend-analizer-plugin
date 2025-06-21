@@ -18,6 +18,9 @@ WooCommerce Trend Analyzer analyzes your sales statistics and queries the OpenAI
 2. Activate the plugin through the "Plugins" menu in WordPress.
 3. Open "Trend Analyzer" in the admin menu and set your OpenAI API key.
 
+== Uninstalling ==
+Al desinstalar el plugin se eliminan las opciones `wta_openai_api_key` y `wta_analysis_data`.
+
 == Frequently Asked Questions ==
 
 = Which OpenAI model does it use? =
