@@ -79,6 +79,9 @@ function wta_load_selected_language() {
         );
     }
 
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+            error_log( sprintf( 'WTA post-compile MO exists: %s', file_exists( $mo ) ? 'yes' : 'no' ) );
+        }
 
     if ( ! file_exists( $mo ) && file_exists( $po ) ) {
         wta_compile_po_to_mo( $po, $mo );
