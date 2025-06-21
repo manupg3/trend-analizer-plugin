@@ -317,7 +317,9 @@ if (diff < sevenDays) {
   }
 
   function drawChart(id, list, key){
-    if(!window.Chart||!list) return;
+    if(!list) return;
+
+    if(!window.Chart||!list) return; main
     var ctx = document.getElementById(id);
     if(!ctx) return;
     var labels=list.map(i=>i.name),
