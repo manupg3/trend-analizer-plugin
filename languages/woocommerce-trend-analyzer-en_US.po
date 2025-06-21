@@ -84,3 +84,123 @@ msgstr "Invalid JSON: %s"
 
 msgid "No hay datos de análisis disponibles."
 msgstr "No analysis data available."
+msgid "Español"
+msgstr "Spanish"
+msgid "English"
+msgstr "English"
+msgid "Haz clic en \"Analizar Tendencias\""
+msgstr "Click \"Analyze Trends\""
+
+msgid "Error al obtener datos."
+msgstr "Error fetching data."
+
+msgid "Error al analizar tendencias."
+msgstr "Error analyzing trends."
+
+msgid "Ventas Totales"
+msgstr "Total Sales"
+
+msgid "Productos Vendidos"
+msgstr "Products Sold"
+
+msgid "Clientes"
+msgstr "Customers"
+
+msgid "Se necesitan 7 días de datos nuevos para analizar tendencias…"
+msgstr "You need 7 days of new data to analyze trends…"
+
+msgid "Último Análisis: hace %s"
+msgstr "Last Analysis: %s ago"
+
+msgid "Más Vendidos"
+msgstr "Top Sellers"
+
+msgid "Menos Vendidos"
+msgstr "Least Sellers"
+
+msgid "Tendencia Actual"
+msgstr "Current Trend"
+
+msgid "Sugerencias"
+msgstr "Suggestions"
+
+msgid "Distribución Geográfica"
+msgstr "Geographical Distribution"
+
+msgid "Analisis de Competidores <span class=\"badge--soon\">Pro</span>"
+msgstr "Competitor Analysis <span class=\"badge--soon\">Pro</span>"
+
+msgid "Pronóstico de Ventas<span class=\"badge--soon\">Pro</span>"
+msgstr "Sales Forecast <span class=\"badge--soon\">Pro</span>"
+
+msgid "Productos Más Vendidos"
+msgstr "Top Selling Products"
+
+msgid "Productos Menos Vendidos"
+msgstr "Least Selling Products"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Cantidad"
+msgstr "Quantity"
+
+msgid "Ingresos"
+msgstr "Revenue"
+
+msgid "Precio Prom."
+msgstr "Avg. Price"
+
+msgid "Análisis De Clientes Por Producto"
+msgstr "Customer Analysis By Product"
+
+msgid "Análisis de %s"
+msgstr "Analysis of %s"
+
+msgid "Análisis por Ubicación"
+msgstr "Location Analysis"
+
+msgid "Otras Tendencias"
+msgstr "Other Trends"
+
+msgid "No hay datos de productos más vendidos."
+msgstr "No top selling product data."
+
+msgid "No hay datos de productos menos vendidos."
+msgstr "No least selling product data."
+
+msgid "Tendencias"
+msgstr "Trends"
+
+msgid "No se identificaron tendencias."
+msgstr "No trends identified."
+
+msgid "A continuación, encontrarás recomendaciones:"
+msgstr "Here are some recommendations:"
+
+msgid "No hay sugerencias disponibles."
+msgstr "No suggestions available."
+
+msgid "Distribución Geográfica de Ventas"
+msgstr "Geographic Sales Distribution"
+
+msgid "Ventas"
+msgstr "Sales"
+
+msgid "No hay datos geográficos disponibles."
+msgstr "No geographic data available."
+
+msgid "día"
+msgstr "day"
+
+msgid "hora"
+msgstr "hour"
+
+msgid "minuto"
+msgstr "minute"
+
+msgid "unos segundos"
+msgstr "a few seconds"
+
+msgid "Permisos insuficientes."
+msgstr "Insufficient permissions."

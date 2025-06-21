@@ -47,13 +47,31 @@ function wta_generate_mo_files() {
             wta_compile_po_to_mo( $po, $mo );
         }
     }
+    if ( ! get_option( 'wta_language' ) ) {
+        update_option( 'wta_language', 'es_ES' );
+    }
+}
+
+/**
+ * Load selected language for plugin translations.
+ */
+function wta_load_selected_language() {
+    $lang = get_option( 'wta_language', 'es_ES' );
+    if ( isset( $_GET['wta_lang'] ) && in_array( $_GET['wta_lang'], [ 'es_ES', 'en_US' ], true ) ) {
+        $lang = sanitize_text_field( $_GET['wta_lang'] );
+        update_option( 'wta_language', $lang );
+    }
+    $mofile = WTA_PLUGIN_DIR . "languages/woocommerce-trend-analyzer-{$lang}.mo";
+    unload_textdomain( 'woocommerce-trend-analyzer' );
+    load_textdomain( 'woocommerce-trend-analyzer', $mofile );
+    return $lang;
 }
 
 /**
  * Initialize plugin.
  */
 function wta_init() {
-    load_plugin_textdomain( 'woocommerce-trend-analyzer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+    $locale = wta_load_selected_language();
     WooCommerce_Trend_Analyzer::get_instance();
 }
 add_action( 'plugins_loaded', 'wta_init' );
