@@ -79,6 +79,7 @@ function wta_load_selected_language() {
         );
     }
 
+
     if ( ! file_exists( $mo ) && file_exists( $po ) ) {
         wta_compile_po_to_mo( $po, $mo );
     }
