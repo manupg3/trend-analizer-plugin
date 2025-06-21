@@ -8,7 +8,7 @@
 .wta-card{
     position: relative;
     border: 1px solid #c2c2c285;
-    height: 109px;
+    height: 150px;
     display: flex
 ;
     flex-direction: column;
