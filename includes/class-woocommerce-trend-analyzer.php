@@ -49,8 +49,8 @@ class WooCommerce_Trend_Analyzer {
 
     public function add_admin_menu() {
         add_menu_page(
-            __( 'Trend Analyzer', 'woocommerce-trend-analyzer' ),
-            __( 'Trend Analyzer', 'woocommerce-trend-analyzer' ),
+            __( 'Trend Analyzer', 'trend-analizer-plugin-main' ),
+            __( 'Trend Analyzer', 'trend-analizer-plugin-main' ),
             'manage_options',
             'trend-analyzer',
             [ $this, 'render_dashboard_page' ],
@@ -67,13 +67,13 @@ class WooCommerce_Trend_Analyzer {
         ] );
         add_settings_section(
             'wta_settings_section',
-            __( 'Configuración de OpenAI', 'woocommerce-trend-analyzer' ),
+            __( 'Configuración de OpenAI', 'trend-analizer-plugin-main' ),
             null,
             'trend-analyzer'
         );
         add_settings_field(
             'wta_api_key',
-            __( 'Clave de API de OpenAI', 'woocommerce-trend-analyzer' ),
+            __( 'Clave de API de OpenAI', 'trend-analizer-plugin-main' ),
             [ $this, 'render_api_key_field' ],
             'trend-analyzer',
             'wta_settings_section'
@@ -87,23 +87,23 @@ class WooCommerce_Trend_Analyzer {
     public function render_api_key_field() {
         $api_key     = get_option( $this->api_key_option );
         $placeholder = $api_key
-            ? __( 'Clave API configurada', 'woocommerce-trend-analyzer' )
-            : __( 'Introduce tu clave API de OpenAI', 'woocommerce-trend-analyzer' );
+            ? __( 'Clave API configurada', 'trend-analizer-plugin-main' )
+            : __( 'Introduce tu clave API de OpenAI', 'trend-analizer-plugin-main' );
 
         echo '<input type="password" name="' . esc_attr( $this->api_key_option ) . '" value="" size="50" placeholder="' . esc_attr( $placeholder ) . '" id="wta-api-key-field" />';
-        echo ' <button type="button" class="button" id="wta-clear-api-key-button">' . esc_html__( 'Clear', 'woocommerce-trend-analyzer' ) . '</button>';
+        echo ' <button type="button" class="button" id="wta-clear-api-key-button">' . esc_html__( 'Clear', 'trend-analizer-plugin-main' ) . '</button>';
         if ( $api_key ) {
-            echo '<p>' . esc_html__( 'La clave API está configurada. Ingresa una nueva clave para ', 'woocommerce-trend-analyzer' ) . '<strong>' . esc_html__( 'actualizarla', 'woocommerce-trend-analyzer' ) . '</strong> ' . esc_html__( 'o pulsa "Clear" para eliminarla.', 'woocommerce-trend-analyzer' ) . '</p>';
+            echo '<p>' . esc_html__( 'La clave API está configurada. Ingresa una nueva clave para ', 'trend-analizer-plugin-main' ) . '<strong>' . esc_html__( 'actualizarla', 'trend-analizer-plugin-main' ) . '</strong> ' . esc_html__( 'o pulsa "Clear" para eliminarla.', 'trend-analizer-plugin-main' ) . '</p>';
         } else {
-            echo '<p>' . esc_html__( 'No hay ninguna clave API configurada actualmente. Ingresa tu clave API para configurarla.', 'woocommerce-trend-analyzer' ) . '</p>';
+            echo '<p>' . esc_html__( 'No hay ninguna clave API configurada actualmente. Ingresa tu clave API para configurarla.', 'trend-analizer-plugin-main' ) . '</p>';
         }
         // Modal Clear
         echo '
         <div id="wta-clear-api-key-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:9999;">
           <div style="background:#fff;margin:10% auto;padding:20px;border-radius:4px;width:320px;text-align:center;">
-            <p>' . esc_html__( '¿Estás seguro de que deseas eliminar la clave API?', 'woocommerce-trend-analyzer' ) . '</p>
-            <button id="wta-confirm-clear" class="button button-primary">' . esc_html__( 'Sí', 'woocommerce-trend-analyzer' ) . '</button>
-            <button id="wta-cancel-clear"  class="button">' . esc_html__( 'No', 'woocommerce-trend-analyzer' ) . '</button>
+            <p>' . esc_html__( '¿Estás seguro de que deseas eliminar la clave API?', 'trend-analizer-plugin-main' ) . '</p>
+            <button id="wta-confirm-clear" class="button button-primary">' . esc_html__( 'Sí', 'trend-analizer-plugin-main' ) . '</button>
+            <button id="wta-cancel-clear"  class="button">' . esc_html__( 'No', 'trend-analizer-plugin-main' ) . '</button>
           </div>
         </div>
         <script>
@@ -130,16 +130,16 @@ class WooCommerce_Trend_Analyzer {
 
     public function render_dashboard_page() {
         $api_key           = get_option( $this->api_key_option );
-        $connection_status = $api_key ? __( 'Conectado', 'woocommerce-trend-analyzer' ) : __( 'No conectado', 'woocommerce-trend-analyzer' );
+        $connection_status = $api_key ? __( 'Conectado', 'trend-analizer-plugin-main' ) : __( 'No conectado', 'trend-analizer-plugin-main' );
         
         
         
         ?>
         <div class="wrap container-dashboard-analyzer">
-          <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'woocommerce-trend-analyzer' ); ?></h1>
+          <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'trend-analizer-plugin-main' ); ?></h1>
           <details>
             <summary>
-              <?php esc_html_e( 'Configuración', 'woocommerce-trend-analyzer' ); ?>
+              <?php esc_html_e( 'Configuración', 'trend-analizer-plugin-main' ); ?>
               <?php if ( $connection_status === 'Conectado' ): ?>
                 <span class="conection-ok"><?php echo esc_html( $connection_status ); ?></span>
               <?php else: ?>
@@ -156,19 +156,19 @@ class WooCommerce_Trend_Analyzer {
           </details>
           <hr>
           <div style="padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
-            <h2><?php esc_html_e( 'Dashboard', 'woocommerce-trend-analyzer' ); ?></h2>
-            <p><?php esc_html_e( 'Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda', 'woocommerce-trend-analyzer' ); ?></p>
+            <h2><?php esc_html_e( 'Dashboard', 'trend-analizer-plugin-main' ); ?></h2>
+            <p><?php esc_html_e( 'Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda', 'trend-analizer-plugin-main' ); ?></p>
             <div class="button-container">
               <form id="wta-lang-form" class="wta-language-select" method="get">
                 <input type="hidden" name="page" value="trend-analyzer" />
                 <?php $sel = get_option( $this->language_option, 'es_ES' ); ?>
                 <select id="wta-lang-select" name="wta_lang">
-                  <option value="es_ES" <?php selected( $sel, 'es_ES' ); ?>><?php esc_html_e( 'Español', 'woocommerce-trend-analyzer' ); ?></option>
-                  <option value="en_US" <?php selected( $sel, 'en_US' ); ?>><?php esc_html_e( 'English', 'woocommerce-trend-analyzer' ); ?></option>
+                  <option value="es_ES" <?php selected( $sel, 'es_ES' ); ?>><?php esc_html_e( 'Español', 'trend-analizer-plugin-main' ); ?></option>
+                  <option value="en_US" <?php selected( $sel, 'en_US' ); ?>><?php esc_html_e( 'English', 'trend-analizer-plugin-main' ); ?></option>
                 </select>
               </form>
-              <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'woocommerce-trend-analyzer' ); ?></button>
-              <a class="obtener-pro-version" href="#"><?php esc_html_e( 'Obtener Pro Version', 'woocommerce-trend-analyzer' ); ?></a>
+              <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'trend-analizer-plugin-main' ); ?></button>
+              <a class="obtener-pro-version" href="#"><?php esc_html_e( 'Obtener Pro Version', 'trend-analizer-plugin-main' ); ?></a>
             </div>
             <div id="wta-analysis-result" style="margin-top:20px;"></div>
           </div>
@@ -207,44 +207,46 @@ class WooCommerce_Trend_Analyzer {
 
     private function get_js_strings() {
         return [
-            'click_analyze'   => __( 'Haz clic en "Analizar Tendencias"', 'woocommerce-trend-analyzer' ),
-            'error_fetch'     => __( 'Error al obtener datos.', 'woocommerce-trend-analyzer' ),
-            'error_analysis'  => __( 'Error al analizar tendencias.', 'woocommerce-trend-analyzer' ),
-            'total_sales'     => __( 'Ventas Totales', 'woocommerce-trend-analyzer' ),
-            'products_sold'   => __( 'Productos Vendidos', 'woocommerce-trend-analyzer' ),
-            'customers'       => __( 'Clientes', 'woocommerce-trend-analyzer' ),
-            'need_7_days'     => __( 'Se necesitan 7 días de datos nuevos para analizar tendencias…', 'woocommerce-trend-analyzer' ),
-            'last_analysis'   => __( 'Último Análisis: hace %s', 'woocommerce-trend-analyzer' ),
-            'tab_top'         => __( 'Más Vendidos', 'woocommerce-trend-analyzer' ),
-            'tab_least'       => __( 'Menos Vendidos', 'woocommerce-trend-analyzer' ),
-            'tab_trend'       => __( 'Tendencia Actual', 'woocommerce-trend-analyzer' ),
-            'tab_suggestions' => __( 'Sugerencias', 'woocommerce-trend-analyzer' ),
-            'tab_geo'         => __( 'Distribución Geográfica', 'woocommerce-trend-analyzer' ),
-            'tab_comp'        => __( 'Analisis de Competidores <span class="badge--soon">Pro</span>', 'woocommerce-trend-analyzer' ),
-            'tab_forecast'    => __( 'Pronóstico de Ventas<span class="badge--soon">Pro</span>', 'woocommerce-trend-analyzer' ),
-            'top_products'    => __( 'Productos Más Vendidos', 'woocommerce-trend-analyzer' ),
-            'least_products'  => __( 'Productos Menos Vendidos', 'woocommerce-trend-analyzer' ),
-            'table_name'      => __( 'Nombre', 'woocommerce-trend-analyzer' ),
-            'table_qty'       => __( 'Cantidad', 'woocommerce-trend-analyzer' ),
-            'table_rev'       => __( 'Ingresos', 'woocommerce-trend-analyzer' ),
-            'table_avg'       => __( 'Precio Prom.', 'woocommerce-trend-analyzer' ),
-            'customer_analysis'=> __( 'Análisis De Clientes Por Producto', 'woocommerce-trend-analyzer' ),
-            'product_analysis'=> __( 'Análisis de %s', 'woocommerce-trend-analyzer' ),
-            'location_analysis'=> __( 'Análisis por Ubicación', 'woocommerce-trend-analyzer' ),
-            'other_trends'    => __( 'Otras Tendencias', 'woocommerce-trend-analyzer' ),
-            'no_top_data'     => __( 'No hay datos de productos más vendidos.', 'woocommerce-trend-analyzer' ),
-            'no_least_data'   => __( 'No hay datos de productos menos vendidos.', 'woocommerce-trend-analyzer' ),
-            'trends_title'    => __( 'Tendencias', 'woocommerce-trend-analyzer' ),
-            'no_trends'       => __( 'No se identificaron tendencias.', 'woocommerce-trend-analyzer' ),
-            'suggestions_intro'=> __( 'A continuación, encontrarás recomendaciones:', 'woocommerce-trend-analyzer' ),
-            'no_suggestions'  => __( 'No hay sugerencias disponibles.', 'woocommerce-trend-analyzer' ),
-            'geo_sales_title' => __( 'Distribución Geográfica de Ventas', 'woocommerce-trend-analyzer' ),
-            'sales_label'     => __( 'Ventas', 'woocommerce-trend-analyzer' ),
-            'no_geo_data'     => __( 'No hay datos geográficos disponibles.', 'woocommerce-trend-analyzer' ),
-            'day'             => __( 'día', 'woocommerce-trend-analyzer' ),
-            'hour'            => __( 'hora', 'woocommerce-trend-analyzer' ),
-            'minute'          => __( 'minuto', 'woocommerce-trend-analyzer' ),
-            'few_seconds'     => __( 'unos segundos', 'woocommerce-trend-analyzer' ),
+            'click_analyze'   => __( 'Haz clic en "Analizar Tendencias"', 'trend-analizer-plugin-main' ),
+            'error_fetch'     => __( 'Error al obtener datos.', 'trend-analizer-plugin-main' ),
+            'error_analysis'  => __( 'Error al analizar tendencias.', 'trend-analizer-plugin-main' ),
+            'total_sales'     => __( 'Ventas Totales', 'trend-analizer-plugin-main' ),
+            'products_sold'   => __( 'Productos Vendidos', 'trend-analizer-plugin-main' ),
+            'customers'       => __( 'Clientes', 'trend-analizer-plugin-main' ),
+            'need_7_days'     => __( 'Se necesitan 7 días de datos nuevos para analizar tendencias…', 'trend-analizer-plugin-main' ),
+		     // translators: %s will be replaced by the time since last analysis, e.g. "2 días" or "3 hours"
+            'last_analysis'   => __( 'Último Análisis: hace %s', 'trend-analizer-plugin-main' ),
+            'tab_top'         => __( 'Más Vendidos', 'trend-analizer-plugin-main' ),
+            'tab_least'       => __( 'Menos Vendidos', 'trend-analizer-plugin-main' ),
+            'tab_trend'       => __( 'Tendencia Actual', 'trend-analizer-plugin-main' ),
+            'tab_suggestions' => __( 'Sugerencias', 'trend-analizer-plugin-main' ),
+            'tab_geo'         => __( 'Distribución Geográfica', 'trend-analizer-plugin-main' ),
+            'tab_comp'        => __( 'Analisis de Competidores <span class="badge--soon">Pro</span>', 'trend-analizer-plugin-main' ),
+            'tab_forecast'    => __( 'Pronóstico de Ventas<span class="badge--soon">Pro</span>', 'trend-analizer-plugin-main' ),
+            'top_products'    => __( 'Productos Más Vendidos', 'trend-analizer-plugin-main' ),
+            'least_products'  => __( 'Productos Menos Vendidos', 'trend-analizer-plugin-main' ),
+            'table_name'      => __( 'Nombre', 'trend-analizer-plugin-main' ),
+            'table_qty'       => __( 'Cantidad', 'trend-analizer-plugin-main' ),
+            'table_rev'       => __( 'Ingresos', 'trend-analizer-plugin-main' ),
+            'table_avg'       => __( 'Precio Prom.', 'trend-analizer-plugin-main' ),
+            'customer_analysis'=> __( 'Análisis De Clientes Por Producto', 'trend-analizer-plugin-main' ),
+			  // translators: %s will be replaced by the product name
+            'product_analysis'=> __( 'Análisis de %s', 'trend-analizer-plugin-main' ),
+            'location_analysis'=> __( 'Análisis por Ubicación', 'trend-analizer-plugin-main' ),
+            'other_trends'    => __( 'Otras Tendencias', 'trend-analizer-plugin-main' ),
+            'no_top_data'     => __( 'No hay datos de productos más vendidos.', 'trend-analizer-plugin-main' ),
+            'no_least_data'   => __( 'No hay datos de productos menos vendidos.', 'trend-analizer-plugin-main' ),
+            'trends_title'    => __( 'Tendencias', 'trend-analizer-plugin-main' ),
+            'no_trends'       => __( 'No se identificaron tendencias.', 'trend-analizer-plugin-main' ),
+            'suggestions_intro'=> __( 'A continuación, encontrarás recomendaciones:', 'trend-analizer-plugin-main' ),
+            'no_suggestions'  => __( 'No hay sugerencias disponibles.', 'trend-analizer-plugin-main' ),
+            'geo_sales_title' => __( 'Distribución Geográfica de Ventas', 'trend-analizer-plugin-main' ),
+            'sales_label'     => __( 'Ventas', 'trend-analizer-plugin-main' ),
+            'no_geo_data'     => __( 'No hay datos geográficos disponibles.', 'trend-analizer-plugin-main' ),
+            'day'             => __( 'día', 'trend-analizer-plugin-main' ),
+            'hour'            => __( 'hora', 'trend-analizer-plugin-main' ),
+            'minute'          => __( 'minuto', 'trend-analizer-plugin-main' ),
+            'few_seconds'     => __( 'unos segundos', 'trend-analizer-plugin-main' ),
         ];
     }
 
@@ -252,7 +254,7 @@ class WooCommerce_Trend_Analyzer {
 public function analyze_trends() {
     check_ajax_referer( 'wta_analyze_trends_nonce', 'nonce' );
     if ( ! current_user_can( 'manage_options' ) ) {
-        wp_send_json_error( __( 'Permisos insuficientes.', 'woocommerce-trend-analyzer' ) );
+        wp_send_json_error( __( 'Permisos insuficientes.', 'trend-analizer-plugin-main' ) );
     }
     
     $totalQuantityAll = 0;
@@ -268,7 +270,7 @@ public function analyze_trends() {
         'type'   => 'shop_order',
     ]);
     if ( empty( $orders ) ) {
-        wp_send_json_error( __( 'No se encontraron pedidos.', 'woocommerce-trend-analyzer' ) );
+        wp_send_json_error( __( 'No se encontraron pedidos.', 'trend-analizer-plugin-main' ) );
     }
 
     // 2) Inicializar estructuras
@@ -279,7 +281,7 @@ public function analyze_trends() {
     // 3) Recorrer pedidos e ítems
     foreach ( $orders as $order ) {
         
-        $city = $order->get_billing_city() ?: __( 'Sin ciudad', 'woocommerce-trend-analyzer' );
+        $city = $order->get_billing_city() ?: __( 'Sin ciudad', 'trend-analizer-plugin-main' );
 
         foreach ( $order->get_items() as $item ) {
             if ( 'line_item' !== $item->get_type() ) {
@@ -341,47 +343,35 @@ public function analyze_trends() {
     $lang       = get_option( $this->language_option, 'es_ES' );
     $prompt = '';
     if ( 'en_US' === $lang ) {
-        $prompt = <<<EOT
-You have this list of products with their sales:
-
-$ai_json
-
-Return ONLY a JSON in English with this EXACT structure:
-
-{
-  "top_selling_products": [ /* up to 10 */ ],
-  "least_selling_products": [ /* at least 2 */ ],
-  "trends": "identify at least 2 short trends",
-  "sugerencias": ["…","…","…"],
-  "location_distribution": [ /* ignore this, we will compute in PHP */ ]
+    $prompt  = "You have this list of products with their sales:\n\n"
+             . $ai_json . "\n\n"
+             . "Return ONLY a JSON in English with this EXACT structure:\n\n"
+             . "{\n"
+             . "  \"top_selling_products\": [ /* up to 10 */ ],\n"
+             . "  \"least_selling_products\": [ /* at least 2 */ ],\n"
+             . "  \"trends\": \"identify at least 2 short trends\",\n"
+             . "  \"sugerencias\": [\"…\",\"…\",\"…\"],\n"
+             . "  \"location_distribution\": [ /* ignore this, we will compute in PHP */ ]\n"
+             . "}\n\n"
+             . "For each product in top/least, add a `customer_analysis.other_trends` field with brief text. Nothing more.";
+} else {
+    $prompt  = "Tienes este listado de productos con sus ventas:\n\n"
+             . $ai_json . "\n\n"
+             . "Devuélveme solo un JSON en español con esta estructura EXACTA:\n\n"
+             . "{\n"
+             . "  \"top_selling_products\": [ /* hasta 10 */ ],\n"
+             . "  \"least_selling_products\": [ /* al menos 2 */ ],\n"
+             . "  \"trends\": \"identifica al menos 2 tendencias breves\",\n"
+             . "  \"sugerencias\": [\"…\",\"…\",\"…\"],\n"
+             . "  \"location_distribution\": [ /* ignore esto, lo calcularemos en PHP */ ]\n"
+             . "}\n\n"
+             . "En cada producto de top/least, añade un campo `customer_analysis.other_trends` con texto breve. Nada más.";
 }
-
-For each product in top/least, add a `customer_analysis.other_trends` field with brief text. Nothing more.
-EOT;
-    } else {
-        $prompt = <<<EOT
-Tienes este listado de productos con sus ventas:
-
-$ai_json
-
-Devuélveme solo un JSON en español con esta estructura EXACTA:
-
-{
-  "top_selling_products": [ /* hasta 10 */ ],
-  "least_selling_products": [ /* al menos 2 */ ],
-  "trends": "identifica al menos 2 tendencias breves",
-  "sugerencias": ["…","…","…"],
-  "location_distribution": [ /* ignore esto, lo calcularemos en PHP */ ]
-}
-
-En cada producto de top/least, añade un campo `customer_analysis.other_trends` con texto breve. Nada más.
-EOT;
-    }
 
     // 6) Llamada a OpenAI
     $api_key = get_option( $this->api_key_option );
     if ( ! $api_key ) {
-        wp_send_json_error( __( 'Clave API no configurada.', 'woocommerce-trend-analyzer' ) );
+        wp_send_json_error( __( 'Clave API no configurada.', 'trend-analizer-plugin-main' ) );
     }
     $resp = wp_remote_post( 'https://api.openai.com/v1/chat/completions', [
         'headers' => [
@@ -409,7 +399,9 @@ EOT;
     $code    = wp_remote_retrieve_response_code( $resp );
     $body    = wp_remote_retrieve_body( $resp );
     if ( 200 !== $code ) {
-        wp_send_json_error( sprintf( __( 'Error API OpenAI: %s', 'woocommerce-trend-analyzer' ), $body ) );
+		// translators: %s will be replaced by the raw OpenAI API response body or error message
+
+        wp_send_json_error( sprintf( __( 'Error API OpenAI: %s', 'trend-analizer-plugin-main' ), $body ) );
     }
 
     // 7) Parsear respuesta
@@ -423,7 +415,9 @@ EOT;
     }
     $result = json_decode( $json, true );
     if ( json_last_error() ) {
-        wp_send_json_error( sprintf( __( 'JSON inválido: %s', 'woocommerce-trend-analyzer' ), json_last_error_msg() ) );
+	    // translators: %s will be replaced by json_last_error_msg(), e.g. "Syntax error"
+	
+        wp_send_json_error( sprintf( __( 'JSON inválido: %s', 'trend-analizer-plugin-main' ), json_last_error_msg() ) );
     }
 
     // 8) Inyectar distribución correcta en PHP
@@ -493,13 +487,13 @@ $result['totals'] = [
     public function get_analysis_data() {
         check_ajax_referer( 'wta_get_analysis_data_nonce', 'nonce' );
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( __( 'Permisos insuficientes.', 'woocommerce-trend-analyzer' ) );
+            wp_send_json_error( __( 'Permisos insuficientes.', 'trend-analizer-plugin-main' ) );
         }
         $stored = get_option( 'wta_analysis_data' );
         if ( $stored ) {
             wp_send_json_success( $stored );
         } else {
-            wp_send_json_error( __( 'No hay datos de análisis disponibles.', 'woocommerce-trend-analyzer' ) );
+            wp_send_json_error( __( 'No hay datos de análisis disponibles.', 'trend-analizer-plugin-main' ) );
         }
     }
 }
