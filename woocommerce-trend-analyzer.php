@@ -69,7 +69,7 @@ function wta_load_selected_language() {
     }
 
     if ( ! $lang ) {
-        $lang = 'es_ES';
+        $lang = 'en_US';
     }
 
     $lang_dir = WTA_PLUGIN_DIR . 'languages/';

@@ -62,3 +62,6 @@ msgid "English"
 msgstr "Inglés"
 msgid "Español"
 msgstr "Español"
+
+msgid "Confirmar Idioma"
+msgstr "Confirmar Idioma"
