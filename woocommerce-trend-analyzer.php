@@ -38,7 +38,9 @@ function wta_load_selected_language() {
     $lang = get_option( 'wta_language', 'es_ES' );
     if ( isset( $_GET['wta_lang'] ) && in_array( $_GET['wta_lang'], [ 'es_ES', 'en_US' ], true ) ) {
         $lang = sanitize_text_field( $_GET['wta_lang'] );
-        update_option( 'wta_language', $lang );
+        if ( current_user_can( 'manage_options' ) ) {
+            update_option( 'wta_language', $lang );
+        }
     }
 
     $lang_dir = WTA_PLUGIN_DIR . 'languages/';
