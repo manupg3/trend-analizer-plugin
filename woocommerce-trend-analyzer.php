@@ -69,6 +69,7 @@ function wta_load_selected_language() {
     }
 
     if ( ! $lang ) {
+        $lang = 'en_US';
         $lang = 'es_ES';
     }
 

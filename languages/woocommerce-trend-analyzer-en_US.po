@@ -204,3 +204,6 @@ msgstr "a few seconds"
 
 msgid "Permisos insuficientes."
 msgstr "Insufficient permissions."
+
+msgid "Confirmar Idioma"
+msgstr "Confirm Language"

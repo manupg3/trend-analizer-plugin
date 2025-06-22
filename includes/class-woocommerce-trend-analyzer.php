@@ -132,6 +132,11 @@ class WooCommerce_Trend_Analyzer {
         $api_key           = get_option( $this->api_key_option );
         $connection_status = $api_key ? __( 'Conectado', 'trend-analizer-plugin-main' ) : __( 'No conectado', 'trend-analizer-plugin-main' );
         $lang              = get_option( $this->language_option );
+
+
+        ?>
+        <div class="wrap container-dashboard-analyzer">
+          <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'trend-analizer-plugin-main' ); ?></h1>
         
         
         
@@ -157,12 +162,24 @@ class WooCommerce_Trend_Analyzer {
                 submit_button();
               ?>
             </form>
+            <?php if ( ! $lang ) : ?>
+            <form id="wta-lang-form" class="wta-language-select" method="get" style="margin-top:10px;">
+              <input type="hidden" name="page" value="trend-analyzer" />
+              <input type="hidden" name="setup" value="1" />
+              <select id="wta-lang-select" name="wta_lang">
+                <option value="en_US"><?php esc_html_e( 'English', 'trend-analizer-plugin-main' ); ?></option>
+                <option value="es_ES"><?php esc_html_e( 'Español', 'trend-analizer-plugin-main' ); ?></option>
+              </select>
+              <?php submit_button( __( 'Confirmar Idioma', 'trend-analizer-plugin-main' ), 'secondary', 'submit', false ); ?>
+            </form>
+            <?php endif; ?>
           </details>
           <hr>
           <div style="padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
             <h2><?php esc_html_e( 'Dashboard', 'trend-analizer-plugin-main' ); ?></h2>
             <p><?php esc_html_e( 'Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda', 'trend-analizer-plugin-main' ); ?></p>
             <div class="button-container">
+
               <?php $sel = get_option( $this->language_option ); ?>
               <?php if ( ! $sel ) : ?>
                 <form id="wta-lang-form" class="wta-language-select" method="get">
@@ -178,7 +195,6 @@ class WooCommerce_Trend_Analyzer {
                   <?php echo ( 'es_ES' === $sel ) ? esc_html__( 'Español', 'trend-analizer-plugin-main' ) : esc_html__( 'English', 'trend-analizer-plugin-main' ); ?>
                 </span>
               <?php endif; ?>
-
               <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'trend-analizer-plugin-main' ); ?></button>
               <a class="obtener-pro-version" href="#"><?php esc_html_e( 'Obtener Pro Version', 'trend-analizer-plugin-main' ); ?></a>
             </div>
@@ -212,7 +228,7 @@ class WooCommerce_Trend_Analyzer {
             'get_nonce' => wp_create_nonce( 'wta_get_analysis_data_nonce' ),
         ] );
         wp_localize_script( 'wta-admin-js', 'wta_i18n', [
-            'lang'    => get_option( $this->language_option, 'es_ES' ),
+            'lang'    => get_option( $this->language_option, 'en_US' ),
             'strings' => $this->get_js_strings(),
         ] );
     }
@@ -352,7 +368,7 @@ public function analyze_trends() {
     $ai_json = wp_json_encode( $ai_input );
 
     // 5) Prompt para OpenAI adaptado al idioma seleccionado
-    $lang       = get_option( $this->language_option, 'es_ES' );
+    $lang       = get_option( $this->language_option, 'en_US' );
     $prompt = '';
     if ( 'en_US' === $lang ) {
     $prompt  = "You have this list of products with their sales:\n\n"
