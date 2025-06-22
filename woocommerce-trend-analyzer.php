@@ -67,6 +67,21 @@ function wta_load_selected_language() {
  */
 function wta_init() {
     $locale = wta_load_selected_language();
+
+    if ( ! class_exists( 'WooCommerce' ) ) {
+        add_action( 'admin_notices', 'wta_missing_wc_notice' );
+        return;
+    }
+
     WooCommerce_Trend_Analyzer::get_instance();
+}
+
+/**
+ * Display admin notice if WooCommerce is not active.
+ */
+function wta_missing_wc_notice() {
+    echo '<div class="notice notice-error"><p>' .
+        esc_html__( 'WooCommerce Trend Analyzer requires WooCommerce to be active.', 'woocommerce-trend-analyzer' ) .
+        '</p></div>';
 }
 add_action( 'plugins_loaded', 'wta_init' );
