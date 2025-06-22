@@ -180,7 +180,7 @@ class WooCommerce_Trend_Analyzer {
         if ( $hook !== 'toplevel_page_trend-analyzer' ) {
             return;
         }
-        wp_enqueue_script( 'chart-js', WTA_PLUGIN_URL . 'assets/js/chart.js', [], '3.9.1', true );
+        wp_enqueue_script( 'chart-js', WTA_PLUGIN_URL . 'assets/js/Chart.min.js', [], '3.9.1', true );
         wp_enqueue_script(
             'wta-admin-js',
             WTA_PLUGIN_URL . 'assets/js/analyzer-admin.js',
