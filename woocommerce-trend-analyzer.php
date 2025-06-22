@@ -58,8 +58,8 @@ function wta_load_selected_language() {
     }
 
     $mofile = $mo;
-    unload_textdomain( 'woocommerce-trend-analyzer' );
-    load_textdomain( 'woocommerce-trend-analyzer', $mofile );
+    unload_textdomain( 'trend-analizer-plugin-main' );
+    load_textdomain( 'trend-analizer-plugin-main', $mofile );
 
     return $lang;
 }
