@@ -131,12 +131,16 @@ class WooCommerce_Trend_Analyzer {
     public function render_dashboard_page() {
         $api_key           = get_option( $this->api_key_option );
         $connection_status = $api_key ? __( 'Conectado', 'trend-analizer-plugin-main' ) : __( 'No conectado', 'trend-analizer-plugin-main' );
+        $lang              = get_option( $this->language_option );
         
         
         
         ?>
         <div class="wrap container-dashboard-analyzer">
           <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'trend-analizer-plugin-main' ); ?></h1>
+          <?php if ( ! $lang ) : ?>
+            <div class="notice notice-warning"><p><?php esc_html_e( 'Seleccione su idioma para comenzar.', 'trend-analizer-plugin-main' ); ?></p></div>
+          <?php endif; ?>
           <details>
             <summary>
               <?php esc_html_e( 'Configuración', 'trend-analizer-plugin-main' ); ?>
@@ -159,14 +163,22 @@ class WooCommerce_Trend_Analyzer {
             <h2><?php esc_html_e( 'Dashboard', 'trend-analizer-plugin-main' ); ?></h2>
             <p><?php esc_html_e( 'Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda', 'trend-analizer-plugin-main' ); ?></p>
             <div class="button-container">
-              <form id="wta-lang-form" class="wta-language-select" method="get">
-                <input type="hidden" name="page" value="trend-analyzer" />
-                <?php $sel = get_option( $this->language_option, 'es_ES' ); ?>
-                <select id="wta-lang-select" name="wta_lang">
-                  <option value="es_ES" <?php selected( $sel, 'es_ES' ); ?>><?php esc_html_e( 'Español', 'trend-analizer-plugin-main' ); ?></option>
-                  <option value="en_US" <?php selected( $sel, 'en_US' ); ?>><?php esc_html_e( 'English', 'trend-analizer-plugin-main' ); ?></option>
-                </select>
-              </form>
+              <?php $sel = get_option( $this->language_option ); ?>
+              <?php if ( ! $sel ) : ?>
+                <form id="wta-lang-form" class="wta-language-select" method="get">
+                  <input type="hidden" name="page" value="trend-analyzer" />
+                  <select id="wta-lang-select" name="wta_lang">
+                    <option value="es_ES"><?php esc_html_e( 'Español', 'trend-analizer-plugin-main' ); ?></option>
+                    <option value="en_US"><?php esc_html_e( 'English', 'trend-analizer-plugin-main' ); ?></option>
+                  </select>
+                  <?php submit_button( __( 'Guardar', 'trend-analizer-plugin-main' ), 'primary', 'submit', false ); ?>
+                </form>
+              <?php else : ?>
+                <span class="wta-selected-lang">
+                  <?php echo ( 'es_ES' === $sel ) ? esc_html__( 'Español', 'trend-analizer-plugin-main' ) : esc_html__( 'English', 'trend-analizer-plugin-main' ); ?>
+                </span>
+              <?php endif; ?>
+
               <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'trend-analizer-plugin-main' ); ?></button>
               <a class="obtener-pro-version" href="#"><?php esc_html_e( 'Obtener Pro Version', 'trend-analizer-plugin-main' ); ?></a>
             </div>
