@@ -1,5 +1,13 @@
 jQuery(document).ready(function($) {
   function t(k){ return (wta_i18n.strings && wta_i18n.strings[k]) || k; }
+  function esc(s){
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
   var resultDiv = $('#wta-analysis-result');
 
   function showLoader(t){ t.html('<div class="loader"></div>'); }
@@ -15,7 +23,7 @@ jQuery(document).ready(function($) {
       if(resp.success){
         generateAnalysisContent(resp.data, resultDiv);
       } else {
-        resultDiv.html('<p>'+ (resp.data||t('click_analyze')) +'</p>');
+        resultDiv.html('<p>'+ esc(resp.data||t('click_analyze')) +'</p>');
       }
     },
     error(){
@@ -37,7 +45,7 @@ jQuery(document).ready(function($) {
         if(resp.success){
           generateAnalysisContent(resp.data, resultDiv);
         } else {
-          resultDiv.html('<p class="error">'+resp.data+'</p>');
+          resultDiv.html('<p class="error">'+esc(resp.data)+'</p>');
         }
       },
       error(){
@@ -188,7 +196,7 @@ if (diff < sevenDays) {
         html += '<h3>'+t('top_products')+'</h3>';
         html += '<table class="wta-table"><thead><tr><th>'+t('table_name')+'</th><th>'+t('table_qty')+'</th><th>'+t('table_rev')+'</th><th>'+t('table_avg')+'</th></tr></thead><tbody>';
         data.top_selling_products.forEach(function(p){
-          html += '<tr><td>'+p.name+'</td><td>'+p.quantity_sold+'</td><td>$'+p.total_revenue.toFixed(2)+'</td><td>$'+p.average_price.toFixed(2)+'</td></tr>';
+          html += '<tr><td>'+esc(p.name)+'</td><td>'+p.quantity_sold+'</td><td>$'+p.total_revenue.toFixed(2)+'</td><td>$'+p.average_price.toFixed(2)+'</td></tr>';
         });
         html += '</tbody></table>';
         html += '<div class="wta-chart-resume"><div><canvas id="top-selling-chart"></canvas></div>' +
@@ -197,7 +205,7 @@ if (diff < sevenDays) {
         data.top_selling_products.forEach(function(prod){
           if(prod.customer_analysis){
             html += '<div class="product-customer-analysis"><details>' +
-                '<summary>'+t('product_analysis').replace('%s', prod.name)+'</summary>';
+                '<summary>'+t('product_analysis').replace('%s', esc(prod.name))+'</summary>';
          if (prod.customer_analysis.location_distribution) {
                   html += '<h5>'+t('location_analysis')+'</h5>';
                   const locs = prod.customer_analysis.location_distribution;
@@ -206,18 +214,18 @@ if (diff < sevenDays) {
                   if (Array.isArray(locs)) {
                     html += '<ul>';
                     locs.forEach(loc => {
-                      html += `<li>${loc.city}: ${loc.sales}</li>`;
+                      html += `<li>${esc(loc.city)}: ${loc.sales}</li>`;
                     });
                     html += '</ul>';
                   }
                   // Si viene un string, lo mostramos tal cual
                   else {
-                    html += '<p>' + locs + '</p>';
+                    html += '<p>' + esc(locs) + '</p>';
                   }
                 }
 
             if(prod.customer_analysis.other_trends){
-              html += '<h5>'+t('other_trends')+'</h5><p>'+prod.customer_analysis.other_trends+'</p>';
+              html += '<h5>'+t('other_trends')+'</h5><p>'+esc(prod.customer_analysis.other_trends)+'</p>';
             }
             html += '</details></div>';
           }
@@ -234,7 +242,7 @@ if (diff < sevenDays) {
         html += '<h3>'+t('least_products')+'</h3>';
         html += '<table class="wta-table"><thead><tr><th>'+t('table_name')+'</th><th>'+t('table_qty')+'</th><th>'+t('table_rev')+'</th><th>'+t('table_avg')+'</th></tr></thead><tbody>';
         data.least_selling_products.forEach(function(p){
-          html += '<tr><td>'+p.name+'</td><td>'+p.quantity_sold+'</td><td>$'+p.total_revenue.toFixed(2)+'</td><td>$'+p.average_price.toFixed(2)+'</td></tr>';
+          html += '<tr><td>'+esc(p.name)+'</td><td>'+p.quantity_sold+'</td><td>$'+p.total_revenue.toFixed(2)+'</td><td>$'+p.average_price.toFixed(2)+'</td></tr>';
         });
         html += '</tbody></table>';
         html += '<div class="wta-chart-resume"><div><canvas id="least-selling-chart"></canvas></div>' +
@@ -243,12 +251,12 @@ if (diff < sevenDays) {
         data.least_selling_products.forEach(function(prod){
           if(prod.customer_analysis){
             html += '<div class="product-customer-analysis"><details>' +
-                '<summary>'+t('product_analysis').replace('%s', prod.name)+'</summary>';
+                '<summary>'+t('product_analysis').replace('%s', esc(prod.name))+'</summary>';
             if(prod.customer_analysis.location_distribution){
-              html += '<h5>'+t('location_analysis')+'</h5><p>'+prod.customer_analysis.location_distribution+'</p>';
+              html += '<h5>'+t('location_analysis')+'</h5><p>'+esc(prod.customer_analysis.location_distribution)+'</p>';
             }
             if(prod.customer_analysis.other_trends){
-              html += '<h5>'+t('other_trends')+'</h5><p>'+prod.customer_analysis.other_trends+'</p>';
+              html += '<h5>'+t('other_trends')+'</h5><p>'+esc(prod.customer_analysis.other_trends)+'</p>';
             }
             html += '</details></div>';
           }
@@ -261,7 +269,7 @@ if (diff < sevenDays) {
 
       // TAB 3
       html += '<div id="tab3" class="wta-tab">';
-      html += data.trends ? '<h3>'+t('trends_title')+'</h3><p>'+data.trends+'</p>' : '<p>'+t('no_trends')+'</p>';
+      html += data.trends ? '<h3>'+t('trends_title')+'</h3><p>'+esc(data.trends)+'</p>' : '<p>'+t('no_trends')+'</p>';
       html += '</div>';
 
       // TAB 4
@@ -269,7 +277,7 @@ if (diff < sevenDays) {
       if(data.sugerencias?.length){
         html += '<p class="wta-soon-text"><svg width="64" height="64" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#004085" stroke-width="1.5"/><path d="M12 17V11" stroke="#004085" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="9" r="1" fill="#004085"/></svg>'+t('suggestions_intro')+'</p>';
         html += '<ul>';
-        data.sugerencias.forEach(s=> html+='<li>'+s+'</li>');
+        data.sugerencias.forEach(s=> html+='<li>'+esc(s)+'</li>');
         html += '</ul>';
       } else {
         html += '<p>'+t('no_suggestions')+'</p>';
@@ -281,7 +289,7 @@ if (diff < sevenDays) {
       if(data.location_distribution?.length){
         html += '<h3>'+t('geo_sales_title')+'</h3><div class="location-cards-container">';
         data.location_distribution.forEach(loc=>{
-          html += '<div class="location-card"><div class="location-icon">📍</div><div class="location-info"><h4>'+loc.city+'</h4><p>'+t('sales_label')+': '+loc.sales+'</p></div></div>';
+          html += '<div class="location-card"><div class="location-icon">📍</div><div class="location-info"><h4>'+esc(loc.city)+'</h4><p>'+t('sales_label')+': '+loc.sales+'</p></div></div>';
         });
         html += '</div>';
       } else {
