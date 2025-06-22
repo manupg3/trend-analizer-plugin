@@ -1,17 +1,17 @@
-=== WooCommerce Trend Analyzer ===
-Contributors: manupg3
+=== Sales Trend Analyzer ===
+Contributors: manu9912
 Tags: woocommerce, analytics, trends, ai, openai
 Requires at least: 5.0
-Tested up to: 6.5
+Tested up to: 6.8
 Stable tag: 1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce Trend Analyzer analyzes your store data and uses ChatGPT to provide sales trend reports.
+Sales Trend Analyzer analyzes your store data and uses ChatGPT to provide sales trend reports.
 
 == Description ==
-WooCommerce Trend Analyzer analyzes your sales statistics and queries the OpenAI API to identify best-selling products, low-performing products, and trend suggestions.
+Sales Trend Analyzer analyzes your sales statistics and queries the OpenAI API to identify best-selling products, low-performing products, and trend suggestions.
 
 == Installation ==
 1. Upload the plugin folder to the `/wp-content/plugins/` directory.
