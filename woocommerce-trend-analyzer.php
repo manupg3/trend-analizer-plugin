@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: WooCommerce Trend Analyzer
+ * Plugin Name: Sales Trend Analyzer
  * Description: Analiza las tendencias de productos en WooCommerce utilizando ChatGPT.
  * Version: 1.1
  * Author: Manuel Peña Ramos
- * Text Domain: woocommerce-trend-analyzer
+ * Text Domain: trend-analizer-plugin-main
  * Domain Path: /languages
  * License: GPLv2 or later
  */
@@ -83,7 +83,7 @@ function wta_init() {
  */
 function wta_missing_wc_notice() {
     echo '<div class="notice notice-error"><p>' .
-        esc_html__( 'WooCommerce Trend Analyzer requires WooCommerce to be active.', 'woocommerce-trend-analyzer' ) .
+        esc_html__( 'WooCommerce Trend Analyzer requires WooCommerce to be active.', 'trend-analizer-plugin-main' ) .
         '</p></div>';
 }
 add_action( 'plugins_loaded', 'wta_init' );
