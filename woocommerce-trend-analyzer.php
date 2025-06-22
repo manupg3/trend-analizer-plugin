@@ -28,6 +28,30 @@ if ( ! defined( 'WTA_PLUGIN_URL' ) ) {
 
 require_once WTA_PLUGIN_DIR . 'includes/class-woocommerce-trend-analyzer.php';
 
+/**
+ * Flag setup on activation if language is not configured.
+ */
+function wta_set_setup_flag() {
+    if ( false === get_option( 'wta_language', false ) ) {
+        add_option( 'wta_setup_needed', 1, '', false );
+    }
+}
+register_activation_hook( __FILE__, 'wta_set_setup_flag' );
+
+/**
+ * Redirect to setup page right after activation.
+ */
+function wta_maybe_redirect_setup() {
+    if ( get_option( 'wta_setup_needed' ) ) {
+        delete_option( 'wta_setup_needed' );
+        if ( ! isset( $_GET['page'] ) ) {
+            wp_safe_redirect( admin_url( 'admin.php?page=trend-analyzer&setup=1' ) );
+            exit;
+        }
+    }
+}
+add_action( 'admin_init', 'wta_maybe_redirect_setup' );
+
 // Translation files (.mo) are expected to be present in the languages folder.
 // They are not generated automatically by the plugin.
 
@@ -35,12 +59,17 @@ require_once WTA_PLUGIN_DIR . 'includes/class-woocommerce-trend-analyzer.php';
  * Load selected language for plugin translations.
  */
 function wta_load_selected_language() {
-    $lang = get_option( 'wta_language', 'es_ES' );
-    if ( isset( $_GET['wta_lang'] ) && in_array( $_GET['wta_lang'], [ 'es_ES', 'en_US' ], true ) ) {
+    $lang = get_option( 'wta_language', false );
+
+    if ( isset( $_GET['wta_lang'] ) && in_array( $_GET['wta_lang'], [ 'es_ES', 'en_US' ], true ) && ! $lang ) {
         $lang = sanitize_text_field( $_GET['wta_lang'] );
         if ( current_user_can( 'manage_options' ) ) {
             update_option( 'wta_language', $lang );
         }
+    }
+
+    if ( ! $lang ) {
+        $lang = 'en_US';
     }
 
     $lang_dir = WTA_PLUGIN_DIR . 'languages/';
