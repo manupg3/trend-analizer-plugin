@@ -70,28 +70,6 @@ jQuery(document).ready(function($) {
     });
   });
 
-  // Tooltip for the "Obtener Pro Version" link
-  var proLink = $('.obtener-pro-version');
-  if (proLink.length) {
-    var proTooltip = $('<span class="wta-tooltip" style="\
-        display:none;\
-        position:absolute;\
-        bottom:120%;\
-        left:50%;\
-        transform:translateX(-50%);\
-        background:rgba(0,0,0,0.75);\
-        color:#fff;\
-        padding:5px 8px;\
-        border-radius:4px;\
-        font-size:12px;\
-        white-space:nowrap;\
-        z-index:1000;\
-      ">'+t('need_7_days')+'</span>');
-    proLink.append(proTooltip);
-    proLink.on('mouseenter', function(){ proTooltip.fadeIn(100); })
-          .on('mouseleave', function(){ proTooltip.fadeOut(100); });
-  }
-
   function generateAnalysisContent(storedData, container){
       
     var data = storedData.data;
