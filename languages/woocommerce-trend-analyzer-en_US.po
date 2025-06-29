@@ -207,3 +207,6 @@ msgstr "Insufficient permissions."
 
 msgid "Confirmar Idioma"
 msgstr "Confirm Language"
+
+msgid "Pr\u00f3ximamente"
+msgstr "Coming soon"
