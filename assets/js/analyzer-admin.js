@@ -86,6 +86,7 @@ jQuery(document).ready(function($) {
         font-size:12px;\
         white-space:nowrap;\
         z-index:1000;\
+      ">'+t('coming_soon')+'</span>');
       ">'+t('need_7_days')+'</span>');
     proLink.append(proTooltip);
     proLink.on('mouseenter', function(){ proTooltip.fadeIn(100); })
