@@ -196,7 +196,7 @@ class WooCommerce_Trend_Analyzer {
                 </span>
               <?php endif; ?>
               <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'trend-analizer-plugin-main' ); ?></button>
-              <a class="obtener-pro-version" href="#" title="<?php esc_attr_e( 'Próximamente', 'trend-analizer-plugin-main' ); ?>"><?php esc_html_e( 'Obtener Pro Version', 'trend-analizer-plugin-main' ); ?></a>
+              <a class="obtener-pro-version" href="#"><?php esc_html_e( 'Obtener Pro Version', 'trend-analizer-plugin-main' ); ?></a>
             </div>
             <div id="wta-analysis-result" style="margin-top:20px;"></div>
           </div>
@@ -242,7 +242,8 @@ class WooCommerce_Trend_Analyzer {
             'products_sold'   => __( 'Productos Vendidos', 'trend-analizer-plugin-main' ),
             'customers'       => __( 'Clientes', 'trend-analizer-plugin-main' ),
             'need_7_days'     => __( 'Se necesitan 7 días de datos nuevos para analizar tendencias…', 'trend-analizer-plugin-main' ),
-		     // translators: %s will be replaced by the time since last analysis, e.g. "2 días" or "3 hours"
+            'coming_soon'     => __( 'Próximamente', 'trend-analizer-plugin-main' ),
+                     // translators: %s will be replaced by the time since last analysis, e.g. "2 días" or "3 hours"
             'last_analysis'   => __( 'Último Análisis: hace %s', 'trend-analizer-plugin-main' ),
             'tab_top'         => __( 'Más Vendidos', 'trend-analizer-plugin-main' ),
             'tab_least'       => __( 'Menos Vendidos', 'trend-analizer-plugin-main' ),
