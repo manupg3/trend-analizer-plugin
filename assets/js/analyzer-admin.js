@@ -10,6 +10,17 @@ jQuery(document).ready(function($) {
   }
   var resultDiv = $('#wta-analysis-result');
 
+  // Acción al pulsar "Ingresar Clave API" cuando falta la configuración
+  $(document).on('click', '#wta-go-settings', function(){
+    var det = document.getElementById('wta-settings');
+    if(det){
+      det.open = true;
+      det.scrollIntoView({behavior: 'smooth', block: 'start'});
+      var field = document.getElementById('wta-api-key-field');
+      if(field){ field.focus(); }
+    }
+  });
+
   function showLoader(t){ t.html('<div class="loader"></div>'); }
   function hideLoader(t){ t.empty(); }
 
@@ -47,13 +58,6 @@ jQuery(document).ready(function($) {
         } else {
           if(resp.data && (resp.data.indexOf('Clave API')!==-1 || resp.data.indexOf('API key')!==-1)){
             resultDiv.html('<p class="error">'+esc(resp.data)+'</p><p><button id="wta-go-settings" class="button button-primary">'+t('enter_api_key')+'</button></p>');
-            $('#wta-go-settings').on('click', function(){
-              var det = $('#wta-settings');
-              if(det.length){
-                det.prop('open', true);
-                $('html,body').animate({scrollTop: det.offset().top}, 300);
-              }
-            });
           } else {
             resultDiv.html('<p class="error">'+esc(resp.data)+'</p>');
           }
@@ -83,6 +87,7 @@ jQuery(document).ready(function($) {
         white-space:nowrap;\
         z-index:1000;\
       ">'+t('coming_soon')+'</span>');
+      ">'+t('need_7_days')+'</span>');
     proLink.append(proTooltip);
     proLink.on('mouseenter', function(){ proTooltip.fadeIn(100); })
           .on('mouseleave', function(){ proTooltip.fadeOut(100); });
