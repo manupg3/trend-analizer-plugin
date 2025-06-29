@@ -89,6 +89,7 @@ msgstr ""
 msgid "No hay datos de an\u00e1lisis disponibles."
 msgstr ""
 
+msgid "Ingresar Clave API"
 msgid "Pr\u00f3ximamente"
 msgstr ""
 

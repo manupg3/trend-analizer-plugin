@@ -208,5 +208,7 @@ msgstr "Insufficient permissions."
 msgid "Confirmar Idioma"
 msgstr "Confirm Language"
 
+msgid "Ingresar Clave API"
+msgstr "Enter API Key"
 msgid "Pr\u00f3ximamente"
 msgstr "Coming soon"

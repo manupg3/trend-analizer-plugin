@@ -66,5 +66,7 @@ msgstr "Español"
 msgid "Confirmar Idioma"
 msgstr "Confirmar Idioma"
 
+msgid "Ingresar Clave API"
+msgstr "Ingresar Clave API"
 msgid "Pr\u00f3ximamente"
 msgstr "Pr\u00f3ximamente"
