@@ -146,7 +146,7 @@ class WooCommerce_Trend_Analyzer {
           <?php if ( ! $lang ) : ?>
             <div class="notice notice-warning"><p><?php esc_html_e( 'Seleccione su idioma para comenzar.', 'trend-analizer-plugin-main' ); ?></p></div>
           <?php endif; ?>
-          <details>
+          <details id="wta-settings">
             <summary>
               <?php esc_html_e( 'Configuración', 'trend-analizer-plugin-main' ); ?>
               <?php if ( $connection_status === 'Conectado' ): ?>
@@ -275,6 +275,7 @@ class WooCommerce_Trend_Analyzer {
             'hour'            => __( 'hora', 'trend-analizer-plugin-main' ),
             'minute'          => __( 'minuto', 'trend-analizer-plugin-main' ),
             'few_seconds'     => __( 'unos segundos', 'trend-analizer-plugin-main' ),
+            'enter_api_key'   => __( 'Ingresar Clave API', 'trend-analizer-plugin-main' ),
         ];
     }
 

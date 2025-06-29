@@ -45,7 +45,18 @@ jQuery(document).ready(function($) {
         if(resp.success){
           generateAnalysisContent(resp.data, resultDiv);
         } else {
-          resultDiv.html('<p class="error">'+esc(resp.data)+'</p>');
+          if(resp.data && (resp.data.indexOf('Clave API')!==-1 || resp.data.indexOf('API key')!==-1)){
+            resultDiv.html('<p class="error">'+esc(resp.data)+'</p><p><button id="wta-go-settings" class="button button-primary">'+t('enter_api_key')+'</button></p>');
+            $('#wta-go-settings').on('click', function(){
+              var det = $('#wta-settings');
+              if(det.length){
+                det.prop('open', true);
+                $('html,body').animate({scrollTop: det.offset().top}, 300);
+              }
+            });
+          } else {
+            resultDiv.html('<p class="error">'+esc(resp.data)+'</p>');
+          }
         }
       },
       error(){

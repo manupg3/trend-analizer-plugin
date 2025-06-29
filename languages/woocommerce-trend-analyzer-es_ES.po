@@ -65,3 +65,6 @@ msgstr "Español"
 
 msgid "Confirmar Idioma"
 msgstr "Confirmar Idioma"
+
+msgid "Ingresar Clave API"
+msgstr "Ingresar Clave API"
