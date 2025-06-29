@@ -196,7 +196,7 @@ class WooCommerce_Trend_Analyzer {
                 </span>
               <?php endif; ?>
               <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'trend-analizer-plugin-main' ); ?></button>
-              <a class="obtener-pro-version" href="#" title="<?php esc_attr_e( 'Próximamente', 'trend-analizer-plugin-main' ); ?>"><?php esc_html_e( 'Obtener Pro Version', 'trend-analizer-plugin-main' ); ?></a>
+              <a class="obtener-pro-version" href="#"><?php esc_html_e( 'Obtener Pro Version', 'trend-analizer-plugin-main' ); ?></a>
             </div>
             <div id="wta-analysis-result" style="margin-top:20px;"></div>
           </div>
