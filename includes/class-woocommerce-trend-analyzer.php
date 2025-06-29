@@ -242,7 +242,8 @@ class WooCommerce_Trend_Analyzer {
             'products_sold'   => __( 'Productos Vendidos', 'trend-analizer-plugin-main' ),
             'customers'       => __( 'Clientes', 'trend-analizer-plugin-main' ),
             'need_7_days'     => __( 'Se necesitan 7 días de datos nuevos para analizar tendencias…', 'trend-analizer-plugin-main' ),
-		     // translators: %s will be replaced by the time since last analysis, e.g. "2 días" or "3 hours"
+            'coming_soon'     => __( 'Próximamente', 'trend-analizer-plugin-main' ),
+                     // translators: %s will be replaced by the time since last analysis, e.g. "2 días" or "3 hours"
             'last_analysis'   => __( 'Último Análisis: hace %s', 'trend-analizer-plugin-main' ),
             'tab_top'         => __( 'Más Vendidos', 'trend-analizer-plugin-main' ),
             'tab_least'       => __( 'Menos Vendidos', 'trend-analizer-plugin-main' ),
