@@ -121,78 +121,80 @@ class STAI_Trend_Analyzer {
     }
 
     public function render_dashboard_page() {
-        $api_key           = get_option( $this->api_key_option );
-        $connection_status = $api_key ? __( 'Conectado', 'sales-trend-analyzer-ia' ) : __( 'No conectado', 'sales-trend-analyzer-ia' );
-        $lang              = get_option( $this->language_option );
+    // Grab current API key, connection status and selected language 
+  $setup_needed = get_option( 'stai_setup_needed', false );
+    $lang         = get_option( 'stai_language',    false );
+    // → Aquí definimos también el estado de conexión:
+    $api_key      = get_option( $this->api_key_option );
+    $conn_status  = $api_key
+        ? __( 'Conectado', 'sales-trend-analyzer-ia' )
+        : __( 'No conectado', 'sales-trend-analyzer-ia' );
 
-
-        ?>
-        <div class="wrap container-dashboard-analyzer">
-          <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'sales-trend-analyzer-ia' ); ?></h1>
-          <?php if ( ! $lang ) : ?>
-            <div class="notice notice-warning"><p><?php esc_html_e( 'Seleccione su idioma para comenzar.', 'sales-trend-analyzer-ia' ); ?></p></div>
-            <form id="wta-lang-form" class="wta-language-select" method="get" style="margin-top:10px;">
-              <input type="hidden" name="page" value="trend-analyzer" />
-              <?php wp_nonce_field( 'stai_set_language', 'stai_lang_nonce' ); ?>
-              <input type="hidden" name="setup" value="1" />
-              <select id="wta-lang-select" name="stai_lang">
-                <option value="en_US"><?php esc_html_e( 'English', 'sales-trend-analyzer-ia' ); ?></option>
-                <option value="es_ES"><?php esc_html_e( 'Español', 'sales-trend-analyzer-ia' ); ?></option>
-              </select>
-              <?php submit_button( __( 'Guardar', 'sales-trend-analyzer-ia' ), 'primary', 'submit', false ); ?>
-            </form>
-          </div>
-        <?php
-            return;
-        endif;
-        ?>
-          <details id="wta-settings">
-            <summary>
-              <?php esc_html_e( 'Configuración', 'sales-trend-analyzer-ia' ); ?>
-              <?php if ( $connection_status === 'Conectado' ): ?>
-                <span class="conection-ok"><?php echo esc_html( $connection_status ); ?></span>
-              <?php else: ?>
-                <span class="conection-error"><?php echo esc_html( $connection_status ); ?></span>
-              <?php endif; ?>
-            </summary>
-            <form method="post" action="options.php">
-              <?php
-                settings_fields( 'stai_settings_group' );
-                do_settings_sections( 'trend-analyzer' );
-                submit_button();
-              ?>
-            </form>
-          </details>
-          <hr>
-          <div style="padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
-            <h2><?php esc_html_e( 'Dashboard', 'sales-trend-analyzer-ia' ); ?></h2>
-            <p><?php esc_html_e( 'Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda', 'sales-trend-analyzer-ia' ); ?></p>
-            <div class="button-container">
-
-              <?php $sel = get_option( $this->language_option ); ?>
-              <?php if ( ! $sel ) : ?>
-                <form id="wta-lang-form" class="wta-language-select" method="get">
-                  <input type="hidden" name="page" value="trend-analyzer" />
-                  <?php wp_nonce_field( 'stai_set_language', 'stai_lang_nonce' ); ?>
-                  <select id="wta-lang-select" name="stai_lang">
-                    <option value="es_ES"><?php esc_html_e( 'Español', 'sales-trend-analyzer-ia' ); ?></option>
-                    <option value="en_US"><?php esc_html_e( 'English', 'sales-trend-analyzer-ia' ); ?></option>
-                  </select>
-                  <?php submit_button( __( 'Guardar', 'sales-trend-analyzer-ia' ), 'primary', 'submit', false ); ?>
-                </form>
-              <?php else : ?>
-                <span class="wta-selected-lang">
-                  <?php echo ( 'es_ES' === $sel ) ? esc_html__( 'Español', 'sales-trend-analyzer-ia' ) : esc_html__( 'English', 'sales-trend-analyzer-ia' ); ?>
-                </span>
-              <?php endif; ?>
-              <button id="wta-analyze-trends-button" class="button button-primary"><?php esc_html_e( 'Analizar Tendencias', 'sales-trend-analyzer-ia' ); ?></button>
-              <a class="obtener-pro-version" href="#" title="<?php esc_attr_e( 'Próximamente', 'sales-trend-analyzer-ia' ); ?>"><?php esc_html_e( 'Obtener Pro Version', 'sales-trend-analyzer-ia' ); ?></a>
-            </div>
-            <div id="wta-analysis-result" style="margin-top:20px;"></div>
-          </div>
-        </div>
-        <?php
+    // 2) Si falta idioma o está el flag, mostramos solo el selector:
+    if ( $setup_needed || ! $lang ) {
+        echo '<div class="wrap">';
+        echo '<h1>' . esc_html__( 'Sales Trend Analyzer – Primer paso', 'sales-trend-analyzer-ia' ) . '</h1>';
+        echo '<p>' . esc_html__( 'Selecciona tu idioma para comenzar:', 'sales-trend-analyzer-ia' ) . '</p>';
+        echo '<form method="get">';
+        echo '  <input type="hidden" name="page" value="trend-analyzer">';
+        wp_nonce_field( 'stai_set_language', 'stai_lang_nonce' );
+        echo '  <select name="stai_lang">';
+        echo '    <option value="es_ES">' . esc_html__( 'Español', 'sales-trend-analyzer-ia' ) . '</option>';
+        echo '    <option value="en_US">' . esc_html__( 'English', 'sales-trend-analyzer-ia' ) . '</option>';
+        echo '  </select> ';
+        submit_button( __( 'Guardar idioma', 'sales-trend-analyzer-ia' ), 'primary', 'submit', false );
+        echo '</form>';
+        echo '</div>';
+        return;
     }
+
+    // 2) Language is set → render the normal dashboard
+    ?>
+    <div class="wrap container-dashboard-analyzer">
+      <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'sales-trend-analyzer-ia' ); ?></h1>
+
+      <details id="wta-settings">
+        <summary>
+          <?php esc_html_e( 'Configuración', 'sales-trend-analyzer-ia' ); ?>
+          <?php if ( 'Conectado' === $conn_status ): ?>
+            <span class="conection-ok"><?php echo esc_html( $conn_status ); ?></span>
+          <?php else: ?>
+            <span class="conection-error"><?php echo esc_html( $conn_status ); ?></span>
+          <?php endif; ?>
+        </summary>
+        <form method="post" action="options.php">
+          <?php
+            settings_fields( 'stai_settings_group' );
+            do_settings_sections( 'trend-analyzer' );
+            submit_button();
+          ?>
+        </form>
+      </details>
+
+      <hr>
+
+      <div style="padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+        <h2><?php esc_html_e( 'Dashboard', 'sales-trend-analyzer-ia' ); ?></h2>
+        <p><?php esc_html_e( 'Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda', 'sales-trend-analyzer-ia' ); ?></p>
+        <div class="button-container">
+          <span class="wta-selected-lang">
+            <?php echo ( 'es_ES' === $lang )
+              ? esc_html__( 'Español', 'sales-trend-analyzer-ia' )
+              : esc_html__( 'English', 'sales-trend-analyzer-ia' ); ?>
+          </span>
+          <button id="wta-analyze-trends-button" class="button button-primary">
+            <?php esc_html_e( 'Analizar Tendencias', 'sales-trend-analyzer-ia' ); ?>
+          </button>
+          <a class="obtener-pro-version" href="#" title="<?php esc_attr_e( 'Próximamente', 'sales-trend-analyzer-ia' ); ?>">
+            <?php esc_html_e( 'Obtener Pro Version', 'sales-trend-analyzer-ia' ); ?>
+          </a>
+        </div>
+        <div id="wta-analysis-result" style="margin-top:20px;"></div>
+      </div>
+    </div>
+    <?php
+}
+
 
     public function enqueue_scripts( $hook ) {
         if ( $hook !== 'toplevel_page_trend-analyzer' ) {
