@@ -129,15 +129,23 @@ class STAI_Trend_Analyzer {
         ?>
         <div class="wrap container-dashboard-analyzer">
           <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'sales-trend-analyzer-ia' ); ?></h1>
-        
-        
-        
-        ?>
-        <div class="wrap container-dashboard-analyzer">
-          <h1><?php esc_html_e( 'Sales Trend Analyzer – IA', 'sales-trend-analyzer-ia' ); ?></h1>
           <?php if ( ! $lang ) : ?>
             <div class="notice notice-warning"><p><?php esc_html_e( 'Seleccione su idioma para comenzar.', 'sales-trend-analyzer-ia' ); ?></p></div>
-          <?php endif; ?>
+            <form id="wta-lang-form" class="wta-language-select" method="get" style="margin-top:10px;">
+              <input type="hidden" name="page" value="trend-analyzer" />
+              <?php wp_nonce_field( 'stai_set_language', 'stai_lang_nonce' ); ?>
+              <input type="hidden" name="setup" value="1" />
+              <select id="wta-lang-select" name="stai_lang">
+                <option value="en_US"><?php esc_html_e( 'English', 'sales-trend-analyzer-ia' ); ?></option>
+                <option value="es_ES"><?php esc_html_e( 'Español', 'sales-trend-analyzer-ia' ); ?></option>
+              </select>
+              <?php submit_button( __( 'Guardar', 'sales-trend-analyzer-ia' ), 'primary', 'submit', false ); ?>
+            </form>
+          </div>
+        <?php
+            return;
+        endif;
+        ?>
           <details id="wta-settings">
             <summary>
               <?php esc_html_e( 'Configuración', 'sales-trend-analyzer-ia' ); ?>
@@ -154,19 +162,6 @@ class STAI_Trend_Analyzer {
                 submit_button();
               ?>
             </form>
-            <?php if ( ! $lang ) : ?>
-            <form id="wta-lang-form" class="wta-language-select" method="get" style="margin-top:10px;">
-              <input type="hidden" name="page" value="trend-analyzer" />
-                  <?php wp_nonce_field( 'stai_set_language', 'stai_lang_nonce' ); ?>
-              <input type="hidden" name="setup" value="1" />
-              <?php wp_nonce_field( 'stai_set_language', 'stai_lang_nonce' ); ?>
-              <select id="wta-lang-select" name="stai_lang">
-                <option value="en_US"><?php esc_html_e( 'English', 'sales-trend-analyzer-ia' ); ?></option>
-                <option value="es_ES"><?php esc_html_e( 'Español', 'sales-trend-analyzer-ia' ); ?></option>
-              </select>
-              <?php submit_button( __( 'Confirmar Idioma', 'sales-trend-analyzer-ia' ), 'secondary', 'submit', false ); ?>
-            </form>
-            <?php endif; ?>
           </details>
           <hr>
           <div style="padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
