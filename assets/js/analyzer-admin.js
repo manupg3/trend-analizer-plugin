@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-  function t(k){ return (wta_i18n.strings && wta_i18n.strings[k]) || k; }
+  function t(k){ return (stai_i18n.strings && stai_i18n.strings[k]) || k; }
   function esc(s){
     return String(s)
       .replace(/&/g, "&amp;")
@@ -27,8 +27,8 @@ jQuery(document).ready(function($) {
   // Al cargar, traer datos guardados
   showLoader(resultDiv);
   $.post({
-    url: wta_ajax_object.ajax_url,
-    data:{ action:'wta_get_analysis_data', nonce:wta_ajax_object.get_nonce },
+    url: stai_ajax_object.ajax_url,
+    data:{ action:'stai_get_analysis_data', nonce:stai_ajax_object.get_nonce },
     success(resp){
       hideLoader(resultDiv);
       if(resp.success){
@@ -48,8 +48,8 @@ jQuery(document).ready(function($) {
     e.preventDefault();
     showLoader(resultDiv);
     $.post({
-      url: wta_ajax_object.ajax_url,
-      data:{ action:'wta_analyze_trends', nonce:wta_ajax_object.nonce },
+      url: stai_ajax_object.ajax_url,
+      data:{ action:'stai_analyze_trends', nonce:stai_ajax_object.nonce },
       success(resp){
           console.log("RESPUESTA", resp);
         hideLoader(resultDiv);
