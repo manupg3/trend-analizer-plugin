@@ -1,214 +1,318 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-05 12:57+0000\n"
 "Language: en_US\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: includes/class-stai-trend-analyzer.php:52
+#: includes/class-stai-trend-analyzer.php:53
 msgid "Trend Analyzer"
 msgstr "Trend Analyzer"
 
+#: includes/class-stai-trend-analyzer.php:70
 msgid "Configuración de OpenAI"
 msgstr "OpenAI Settings"
 
+#: includes/class-stai-trend-analyzer.php:76
 msgid "Clave de API de OpenAI"
 msgstr "OpenAI API Key"
 
+#: includes/class-stai-trend-analyzer.php:90
 msgid "Clave API configurada"
 msgstr "API Key set"
 
+#: includes/class-stai-trend-analyzer.php:91
 msgid "Introduce tu clave API de OpenAI"
 msgstr "Enter your OpenAI API key"
 
+#: includes/class-stai-trend-analyzer.php:94
 msgid "Clear"
 msgstr "Clear"
 
+#: includes/class-stai-trend-analyzer.php:96
 msgid "La clave API está configurada. Ingresa una nueva clave para "
 msgstr "The API key is set. Enter a new key to "
 
+#: includes/class-stai-trend-analyzer.php:96
 msgid "actualizarla"
 msgstr "update it"
 
+#: includes/class-stai-trend-analyzer.php:96
 msgid "o pulsa \"Clear\" para eliminarla."
 msgstr "or press \"Clear\" to remove it."
 
-msgid "No hay ninguna clave API configurada actualmente. Ingresa tu clave API para configurarla."
+#: includes/class-stai-trend-analyzer.php:98
+msgid ""
+"No hay ninguna clave API configurada actualmente. Ingresa tu clave API para "
+"configurarla."
 msgstr "No API key is currently set. Enter your API key to configure it."
 
+#: includes/class-stai-trend-analyzer.php:104
 msgid "¿Estás seguro de que deseas eliminar la clave API?"
 msgstr "Are you sure you want to delete the API key?"
 
+#: includes/class-stai-trend-analyzer.php:105
 msgid "Sí"
 msgstr "Yes"
 
+#: includes/class-stai-trend-analyzer.php:106
 msgid "No"
 msgstr "No"
 
+#: includes/class-stai-trend-analyzer.php:130
 msgid "Conectado"
 msgstr "Connected"
 
+#: includes/class-stai-trend-analyzer.php:131
 msgid "No conectado"
 msgstr "Not connected"
 
+#: includes/class-stai-trend-analyzer.php:136
+msgid "Sales Trend Analyzer – Primer paso"
+msgstr "Sales Trend Analyzer – First Step"
+
+#: includes/class-stai-trend-analyzer.php:137
+msgid "Selecciona tu idioma para comenzar:"
+msgstr "Select your language to get started:"
+
+#: includes/class-stai-trend-analyzer.php:142
+#: includes/class-stai-trend-analyzer.php:182
+msgid "Español"
+msgstr "Spanish"
+
+#: includes/class-stai-trend-analyzer.php:143
+#: includes/class-stai-trend-analyzer.php:183
+msgid "English"
+msgstr "English"
+
+#: includes/class-stai-trend-analyzer.php:145
+msgid "Guardar idioma"
+msgstr "Save Language"
+
+#: includes/class-stai-trend-analyzer.php:154
 msgid "Sales Trend Analyzer – IA"
 msgstr "Sales Trend Analyzer – AI"
 
+#: includes/class-stai-trend-analyzer.php:158
 msgid "Configuración"
 msgstr "Settings"
 
+#: includes/class-stai-trend-analyzer.php:177
 msgid "Dashboard"
 msgstr "Dashboard"
 
-msgid "Obtén análisis detallados y personalizados sobre las tendencias actuales en tu tienda"
+#: includes/class-stai-trend-analyzer.php:178
+msgid ""
+"Obtén análisis detallados y personalizados sobre las tendencias actuales en "
+"tu tienda"
 msgstr "Get detailed and personalized analysis of current trends in your store"
 
+#: includes/class-stai-trend-analyzer.php:186
 msgid "Analizar Tendencias"
 msgstr "Analyze Trends"
 
+#: includes/class-stai-trend-analyzer.php:188
+msgid "Próximamente"
+msgstr "Coming soon"
+
+#: includes/class-stai-trend-analyzer.php:189
 msgid "Obtener Pro Version"
 msgstr "Get Pro Version"
 
-msgid "No se encontraron pedidos."
-msgstr "No orders found."
-
-msgid "Sin ciudad"
-msgstr "No city"
-
-msgid "Clave API no configurada."
-msgstr "API key not set."
-
-msgid "Error API OpenAI: %s"
-msgstr "OpenAI API Error: %s"
-
-msgid "JSON inválido: %s"
-msgstr "Invalid JSON: %s"
-
-msgid "No hay datos de análisis disponibles."
-msgstr "No analysis data available."
-msgid "Español"
-msgstr "Spanish"
-msgid "English"
-msgstr "English"
+#: includes/class-stai-trend-analyzer.php:230
 msgid "Haz clic en \"Analizar Tendencias\""
 msgstr "Click \"Analyze Trends\""
 
+#: includes/class-stai-trend-analyzer.php:231
 msgid "Error al obtener datos."
 msgstr "Error fetching data."
 
+#: includes/class-stai-trend-analyzer.php:232
 msgid "Error al analizar tendencias."
 msgstr "Error analyzing trends."
 
+#: includes/class-stai-trend-analyzer.php:233
 msgid "Ventas Totales"
 msgstr "Total Sales"
 
+#: includes/class-stai-trend-analyzer.php:234
 msgid "Productos Vendidos"
 msgstr "Products Sold"
 
+#: includes/class-stai-trend-analyzer.php:235
 msgid "Clientes"
 msgstr "Customers"
 
+#: includes/class-stai-trend-analyzer.php:236
 msgid "Se necesitan 7 días de datos nuevos para analizar tendencias…"
 msgstr "You need 7 days of new data to analyze trends…"
 
+#: includes/class-stai-trend-analyzer.php:238
+#, php-format
 msgid "Último Análisis: hace %s"
 msgstr "Last Analysis: %s ago"
 
+#: includes/class-stai-trend-analyzer.php:239
 msgid "Más Vendidos"
 msgstr "Top Sellers"
 
+#: includes/class-stai-trend-analyzer.php:240
 msgid "Menos Vendidos"
 msgstr "Least Sellers"
 
+#: includes/class-stai-trend-analyzer.php:241
 msgid "Tendencia Actual"
 msgstr "Current Trend"
 
+#: includes/class-stai-trend-analyzer.php:242
 msgid "Sugerencias"
 msgstr "Suggestions"
 
+#: includes/class-stai-trend-analyzer.php:243
 msgid "Distribución Geográfica"
 msgstr "Geographical Distribution"
 
+#: includes/class-stai-trend-analyzer.php:244
 msgid "Analisis de Competidores <span class=\"badge--soon\">Pro</span>"
 msgstr "Competitor Analysis <span class=\"badge--soon\">Pro</span>"
 
+#: includes/class-stai-trend-analyzer.php:245
 msgid "Pronóstico de Ventas<span class=\"badge--soon\">Pro</span>"
 msgstr "Sales Forecast <span class=\"badge--soon\">Pro</span>"
 
+#: includes/class-stai-trend-analyzer.php:246
 msgid "Productos Más Vendidos"
 msgstr "Top Selling Products"
 
+#: includes/class-stai-trend-analyzer.php:247
 msgid "Productos Menos Vendidos"
 msgstr "Least Selling Products"
 
+#: includes/class-stai-trend-analyzer.php:248
 msgid "Nombre"
 msgstr "Name"
 
+#: includes/class-stai-trend-analyzer.php:249
 msgid "Cantidad"
 msgstr "Quantity"
 
+#: includes/class-stai-trend-analyzer.php:250
 msgid "Ingresos"
 msgstr "Revenue"
 
+#: includes/class-stai-trend-analyzer.php:251
 msgid "Precio Prom."
 msgstr "Avg. Price"
 
+#: includes/class-stai-trend-analyzer.php:252
 msgid "Análisis De Clientes Por Producto"
 msgstr "Customer Analysis By Product"
 
+#: includes/class-stai-trend-analyzer.php:254
+#, php-format
 msgid "Análisis de %s"
 msgstr "Analysis of %s"
 
+#: includes/class-stai-trend-analyzer.php:255
 msgid "Análisis por Ubicación"
 msgstr "Location Analysis"
 
+#: includes/class-stai-trend-analyzer.php:256
 msgid "Otras Tendencias"
 msgstr "Other Trends"
 
+#: includes/class-stai-trend-analyzer.php:257
 msgid "No hay datos de productos más vendidos."
 msgstr "No top selling product data."
 
+#: includes/class-stai-trend-analyzer.php:258
 msgid "No hay datos de productos menos vendidos."
 msgstr "No least selling product data."
 
+#: includes/class-stai-trend-analyzer.php:259
 msgid "Tendencias"
 msgstr "Trends"
 
+#: includes/class-stai-trend-analyzer.php:260
 msgid "No se identificaron tendencias."
 msgstr "No trends identified."
 
+#: includes/class-stai-trend-analyzer.php:261
 msgid "A continuación, encontrarás recomendaciones:"
 msgstr "Here are some recommendations:"
 
+#: includes/class-stai-trend-analyzer.php:262
 msgid "No hay sugerencias disponibles."
 msgstr "No suggestions available."
 
+#: includes/class-stai-trend-analyzer.php:263
 msgid "Distribución Geográfica de Ventas"
 msgstr "Geographic Sales Distribution"
 
+#: includes/class-stai-trend-analyzer.php:264
 msgid "Ventas"
 msgstr "Sales"
 
+#: includes/class-stai-trend-analyzer.php:265
 msgid "No hay datos geográficos disponibles."
 msgstr "No geographic data available."
 
+#: includes/class-stai-trend-analyzer.php:266
 msgid "día"
 msgstr "day"
 
+#: includes/class-stai-trend-analyzer.php:267
 msgid "hora"
 msgstr "hour"
 
+#: includes/class-stai-trend-analyzer.php:268
 msgid "minuto"
 msgstr "minute"
 
+#: includes/class-stai-trend-analyzer.php:269
 msgid "unos segundos"
 msgstr "a few seconds"
 
+#: includes/class-stai-trend-analyzer.php:270
+msgid "Ingresar Clave API"
+msgstr "Enter API Key"
+
+#: includes/class-stai-trend-analyzer.php:278
+#: includes/class-stai-trend-analyzer.php:511
 msgid "Permisos insuficientes."
 msgstr "Insufficient permissions."
 
-msgid "Confirmar Idioma"
-msgstr "Confirm Language"
+#: includes/class-stai-trend-analyzer.php:294
+msgid "No se encontraron pedidos."
+msgstr "No orders found."
 
-msgid "Ingresar Clave API"
-msgstr "Enter API Key"
-msgid "Pr\u00f3ximamente"
-msgstr "Coming soon"
+#: includes/class-stai-trend-analyzer.php:305
+msgid "Sin ciudad"
+msgstr "No city"
+
+#: includes/class-stai-trend-analyzer.php:395
+msgid "Clave API no configurada."
+msgstr "API key not set."
+
+#: includes/class-stai-trend-analyzer.php:425
+#, php-format
+msgid "Error API OpenAI: %s"
+msgstr "OpenAI API Error: %s"
+
+#: includes/class-stai-trend-analyzer.php:441
+#, php-format
+msgid "JSON inválido: %s"
+msgstr "Invalid JSON: %s"
+
+#: includes/class-stai-trend-analyzer.php:517
+msgid "No hay datos de análisis disponibles."
+msgstr "No analysis data available."
+
+#: woocommerce-trend-analyzer.php:79
+msgid "WooCommerce Trend Analyzer requires WooCommerce to be active."
+msgstr "WooCommerce Trend Analyzer requires WooCommerce to be active."
+
+#~ msgid "Select your language to get started:"
+#~ msgstr "Select your language to get started:"
